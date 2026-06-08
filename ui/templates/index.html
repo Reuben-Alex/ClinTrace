@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClinTrace — AI Clinical Triage</title>
+    <script>
+        (function () {
+            var t = localStorage.getItem("clinictrace-theme");
+            if (t === "dark" || t === "light") {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/app.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div class="logo">
+                <div class="logo-mark">
+                    <svg class="logo-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                        <rect x="2" y="2" width="32" height="32" rx="8" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M8 18h20M18 8v20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M10 24c2-4 4-6 8-6s6 2 8 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                    </svg>
+                    <h1>ClinTrace</h1>
+                </div>
+                <span class="tagline">AI-Powered Clinical Triage with Traceable Reasoning</span>
+            </div>
+            <button
+                type="button"
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="Toggle dark mode"
+            >
+                <svg class="icon-sun" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.93 4.93l1.41 1.41M13.66 13.66l1.41 1.41M4.93 15.07l1.41-1.41M13.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M15.5 11.5a6.5 6.5 0 01-8-8 6.5 6.5 0 108 8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+
+        <nav class="nav-tabs" aria-label="App sections">
+            <a href="/" class="nav-tab nav-tab-active">Manual Intake</a>
+            <a href="/nhamcs" class="nav-tab">NHAMCS Test Lab</a>
+        </nav>
+
+        <main>
+            <section class="card intake-form" aria-labelledby="intake-heading">
+                <h2 class="section-title" id="intake-heading">Patient Intake</h2>
+                <p class="section-description">
+                    Enter patient presentation details including symptoms, vitals,
+                    history, and medications. The AI triage pipeline will parse,
+                    score severity, detect red flags, and route appropriately.
+                </p>
+
+                <form action="/triage" method="post" id="triageForm">
+                    <div class="form-group">
+                        <label for="patient_input">Patient Presentation</label>
+                        <textarea
+                            id="patient_input"
+                            name="patient_input"
+                            rows="8"
+                            placeholder="Example: 45-year-old male presenting with crushing chest pain radiating to left arm for 30 minutes. Diaphoretic, nauseated. BP 160/95, HR 110, RR 22, SpO2 94% on room air. History of hypertension and type 2 diabetes. Current meds: metformin, lisinopril. No known allergies. Pain scale 9/10."
+                            required
+                            aria-describedby="intake-help"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span class="btn-text">Run Triage Pipeline</span>
+                            <span class="btn-loading" style="display:none;">Processing</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="loadDemo()">
+                            Load Demo Case
+                        </button>
+                    </div>
+                </form>
+
+                <div class="demo-cases">
+                    <h3>Quick Demo Cases</h3>
+                    <div class="demo-grid" role="group" aria-label="Demo patient cases">
+                        <button type="button" class="demo-btn" data-case="chest_pain" onclick="setCase('chest_pain')">
+                            <strong>Chest Pain</strong>
+                            <span>STEMI presentation</span>
+                        </button>
+                        <button type="button" class="demo-btn" data-case="stroke" onclick="setCase('stroke')">
+                            <strong>Stroke</strong>
+                            <span>Acute CVA symptoms</span>
+                        </button>
+                        <button type="button" class="demo-btn" data-case="sepsis" onclick="setCase('sepsis')">
+                            <strong>Sepsis</strong>
+                            <span>qSOFA positive</span>
+                        </button>
+                        <button type="button" class="demo-btn" data-case="minor" onclick="setCase('minor')">
+                            <strong>Minor</strong>
+                            <span>Ankle sprain</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>
+                ClinTrace &mdash; Every decision traced to
+                <a href="https://app.phoenix.arize.com" target="_blank" rel="noopener noreferrer">Arize Phoenix</a>.
+                Built with Google ADK + Gemini.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        const demoCases = {
+            chest_pain: "45-year-old male presenting with crushing chest pain radiating to left arm for 30 minutes. Diaphoretic, nauseated. BP 160/95, HR 110, RR 22, SpO2 94% on room air. History of hypertension and type 2 diabetes. Current meds: metformin, lisinopril. No known allergies. Pain scale 9/10.",
+            stroke: "72-year-old female with sudden onset right-sided weakness and slurred speech starting 45 minutes ago. Unable to lift right arm, facial droop on right side. BP 185/100, HR 88, RR 16, SpO2 97%. History of atrial fibrillation, not currently on anticoagulation. Meds: metoprolol, atorvastatin. NKDA.",
+            sepsis: "68-year-old male, nursing home resident, brought in for confusion and fever x2 days. Temperature 103.2F, HR 105, RR 24, BP 88/52, SpO2 92% on 2L NC. Has indwelling urinary catheter. History of dementia, CHF, CKD stage 3. Meds: furosemide, donepezil, aspirin. Allergic to sulfa drugs.",
+            minor: "28-year-old female who twisted her right ankle while jogging 2 hours ago. Swelling over lateral malleolus, able to bear weight with pain. No deformity. BP 118/72, HR 76, RR 14, SpO2 99%. No significant medical history. Takes oral contraceptives only. NKDA. Pain 5/10."
+        };
+
+        function setCase(key) {
+            const input = document.getElementById('patient_input');
+            input.value = demoCases[key];
+            input.focus();
+        }
+
+        function loadDemo() {
+            setCase('chest_pain');
+        }
+    </script>
+</body>
+</html>

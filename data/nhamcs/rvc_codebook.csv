@@ -1,0 +1,1315 @@
+variable,code,label
+RFV13D,1005,Chills
+RFV13D,1010,Fever
+RFV13D,1012,Other symptoms of body temperature
+RFV13D,1015,"Tiredness, exhaustion"
+RFV13D,1020,General weakness
+RFV13D,1025,General ill feeling
+RFV13D,1030,Fainting (syncope)
+RFV13D,1035,Symptoms of fluid abnormalities
+RFV13D,1040,Weight gain
+RFV13D,1045,Weight loss
+RFV13D,1046,"Symptoms of face, not elsewhere class..."
+RFV13D,1050,Chest pain and related symptoms (not ...
+RFV13D,1055,"Pain, site not referable to a specifi..."
+RFV13D,1060,"Pain and related symptoms, general, s..."
+RFV13D,1065,"Tumor or mass, site unspecified"
+RFV13D,1066,"Lesion, internal, NOS (excludes brain and"
+RFV13D,1070,"Bleeding, site unspecified"
+RFV13D,1075,Symptoms of growth and developmental ...
+RFV13D,1080,"General symptoms of infants, NEC"
+RFV13D,1085,General or unspecified nonviral infec...
+RFV13D,1090,"Allergy, NOS"
+RFV13D,1095,Disorders of motor functions
+RFV13D,1096,"Dyslexia, NOS"
+RFV13D,1100,Anxiety and nervousness
+RFV13D,1105,Fears and phobias
+RFV13D,1110,Depression
+RFV13D,1115,Anger
+RFV13D,1120,Problems with identity and self-esteem
+RFV13D,1123,Transgender
+RFV13D,1125,Restlessness
+RFV13D,1130,Behavioral disturbances
+RFV13D,1135,Disturbances of sleep
+RFV13D,1140,Smoking problems
+RFV13D,1145,Alcohol-related problems
+RFV13D,1150,Abnormal drug usage
+RFV13D,1155,Delusions or hallucinations
+RFV13D,1160,Psychosexual disorders
+RFV13D,1165,Oth sympt/prob relat psychological an...
+RFV13D,1200,Abnormal involuntary movements
+RFV13D,1205,Convulsions
+RFV13D,1207,"Symptoms of head, NEC"
+RFV13D,1210,"Headache, pain in head"
+RFV13D,1215,"Memory, disturbances of"
+RFV13D,1220,Disturbances of sensation
+RFV13D,1225,Vertigo - dizziness
+RFV13D,1230,Weakness (neurologic)
+RFV13D,1235,"Disorders of speech, speech disturbance"
+RFV13D,1240,Other symptoms referable to the nervo...
+RFV13D,1260,Abnormal pulsations and palpitations
+RFV13D,1265,Heart pain
+RFV13D,1270,Other symptoms of the heart
+RFV13D,1275,Symptoms of lymph glands (or nodes)
+RFV13D,1280,Oth sympt referable to the cardiovasc...
+RFV13D,1305,Vision dysfunctions
+RFV13D,1310,Discharge from eye
+RFV13D,1315,Eye infection and inflammation
+RFV13D,1320,Abnormal sensations of the eye
+RFV13D,1325,Abnormal eye movements
+RFV13D,1330,Abnormal appearance of eyes
+RFV13D,1335,"Other symptoms referable to eye, NEC"
+RFV13D,1340,Symptoms of eyelids
+RFV13D,1345,Hearing dysfunctions
+RFV13D,1350,Discharge from ear
+RFV13D,1355,"Earache, or ear infection"
+RFV13D,1360,Plugged feeling in ear
+RFV13D,1365,"Other symptoms referable to the ears,..."
+RFV13D,1400,Nasal congestion
+RFV13D,1405,Other symptoms of nose
+RFV13D,1410,Sinus problems
+RFV13D,1415,Shortness of breath
+RFV13D,1420,Labored or difficult breathing
+RFV13D,1425,Wheezing
+RFV13D,1430,"Breathing problems, NEC"
+RFV13D,1435,Sneezing
+RFV13D,1440,Cough
+RFV13D,1445,"Head cold, upper respiratory infectio..."
+RFV13D,1450,General viral infection
+RFV13D,1455,Symptoms referable to throat
+RFV13D,1460,Symptoms referable to tonsils
+RFV13D,1470,Abnormalities of sputum or phlegm
+RFV13D,1475,Congestion in chest
+RFV13D,1480,Disorders of voice
+RFV13D,1485,Other symptoms referable to the respi...
+RFV13D,1500,Symptoms of teeth and gums
+RFV13D,1501,"Symptoms of the jaw, NOS"
+RFV13D,1505,Symptoms referable to lips
+RFV13D,1510,Symptoms referable to mouth
+RFV13D,1515,Symptoms referable to tongue
+RFV13D,1520,Difficulty in swallowing (dysphagia)
+RFV13D,1525,Nausea
+RFV13D,1530,Vomiting
+RFV13D,1535,Heartburn and indigestion (dyspepsia)
+RFV13D,1540,Gastrointestinal infection
+RFV13D,1545,"Stomach and abdominal pain, cramps an..."
+RFV13D,1565,Change in abdominal size
+RFV13D,1570,"Appetite, abnormal"
+RFV13D,1575,Difficulty eating
+RFV13D,1580,Gastrointestinal bleeding
+RFV13D,1585,Flatulence
+RFV13D,1590,Constipation
+RFV13D,1595,Diarrhea
+RFV13D,1600,Other symptoms or changes in bowel fu...
+RFV13D,1605,Symptoms referable to anus-rectum
+RFV13D,1610,"Symptoms of liver, gallbladder, and b..."
+RFV13D,1615,Other symptoms referable to digestive...
+RFV13D,1640,Abnormalities of urine
+RFV13D,1645,Frequency and urgency of urination
+RFV13D,1650,Painful urination
+RFV13D,1655,Incontinence of urine (enuresis)
+RFV13D,1660,Other urinary dysfunctions
+RFV13D,1665,Symptoms of bladder
+RFV13D,1670,Symptoms of the kidneys
+RFV13D,1675,"Urinary tract infection, NOS"
+RFV13D,1680,Other symptoms referable to urinary t...
+RFV13D,1700,Symptoms of penis
+RFV13D,1705,Penile discharge
+RFV13D,1710,Symptoms of prostate
+RFV13D,1715,Symptoms of the scrotum and testes
+RFV13D,1720,Other symptoms of male reproductive s...
+RFV13D,1730,Absence of menstruation (amenorrhea)
+RFV13D,1735,Irregularity of menstrual interval
+RFV13D,1740,Irregularity of menstrual flow
+RFV13D,1745,"Menstrual symptoms, other and unspeci..."
+RFV13D,1750,Menopausal symptoms
+RFV13D,1755,Uterine and vaginal bleeding
+RFV13D,1760,Vaginal discharge
+RFV13D,1765,Other vaginal symptoms
+RFV13D,1770,Vulvar disorders
+RFV13D,1775,Pelvic symptoms
+RFV13D,1790,Problems of pregnancy
+RFV13D,1791,Postpartum problems
+RFV13D,1795,Other symptoms referable to the femal...
+RFV13D,1800,Pain or soreness of breast
+RFV13D,1805,Lump or mass of breast
+RFV13D,1810,Other symptoms referable to breast
+RFV13D,1815,Symptoms of infertility
+RFV13D,1820,Hormone deficiency or problem
+RFV13D,1825,Symptoms of sexual dysfunction
+RFV13D,1830,Acne or pimples
+RFV13D,1835,Discoloration or pigmentation
+RFV13D,1840,"Infections of skin, NOS"
+RFV13D,1845,Symptoms of skin moles
+RFV13D,1850,"Warts, NOS"
+RFV13D,1855,Other growths of skin
+RFV13D,1860,Skin rash
+RFV13D,1865,Skin lesion
+RFV13D,1870,"Skin irritations, NEC"
+RFV13D,1875,Swelling of skin
+RFV13D,1880,Other symptoms referable to skin
+RFV13D,1885,Symptoms referable to nails
+RFV13D,1890,Symptoms referable to hair and scalp
+RFV13D,1895,Other symptoms of nails and hair
+RFV13D,1900,Neck symptoms
+RFV13D,1905,Back symptoms
+RFV13D,1910,Low back symptoms
+RFV13D,1915,Hip symptoms
+RFV13D,1920,Leg symptoms
+RFV13D,1925,Knee symptoms
+RFV13D,1930,Ankle symptoms
+RFV13D,1935,Foot and toe symptoms
+RFV13D,1940,Shoulder symptoms
+RFV13D,1945,Arm symptoms
+RFV13D,1950,Elbow symptoms
+RFV13D,1955,Wrist symptoms
+RFV13D,1960,Hand and finger symptoms
+RFV13D,1965,Symptoms of unspecified muscles
+RFV13D,1970,Symptoms of unspecified joints
+RFV13D,1975,Musculoskeletal deformities
+RFV13D,1980,Other musculoskeletal symptoms; inclu...
+RFV13D,2005,Intestinal infectious diseases
+RFV13D,2010,Streptococcal infection
+RFV13D,2015,Viral diseases
+RFV13D,2016,"Coronavirus infection, unspecified"
+RFV13D,2017,SARS-assoc coronavirus cause of dis class...
+RFV13D,2020,Venereal diseases
+RFV13D,2025,Fungus infections (mycoses)
+RFV13D,2030,Parasitic diseases
+RFV13D,2031,"Sepsis, septicemia"
+RFV13D,2035,Other and unspecified infectious and ...
+RFV13D,2100,"Cancer, gastrointestinal tract"
+RFV13D,2105,"Cancer, respiratory tract"
+RFV13D,2110,"Cancer, skin and subcutaneous tissues"
+RFV13D,2115,"Cancer, breast"
+RFV13D,2120,"Cancer, female genital tract"
+RFV13D,2125,"Cancer, male genital tract"
+RFV13D,2126,Cancer of urinary tract
+RFV13D,2130,Other malignant and unspecified neopl...
+RFV13D,2135,"Hodgkin's disease, lymphomata, leukemias"
+RFV13D,2140,Fibroids and other uterine neoplasms
+RFV13D,2145,Other benign neoplasms
+RFV13D,2150,Neoplasm of uncertain nature
+RFV13D,2200,Diseases of the thyroid gland
+RFV13D,2201,Diabetic skin ulcer (wound check)
+RFV13D,2205,Diabetes mellitus
+RFV13D,2210,"Gout, hyperuricemia"
+RFV13D,2215,"Other endocrine, nutritional, and met..."
+RFV13D,2250,Anemia
+RFV13D,2255,Other diseases of blood and blood-for...
+RFV13D,2300,Organic psychoses
+RFV13D,2305,Functional psychoses
+RFV13D,2310,Neuroses
+RFV13D,2315,Personality and character disorders
+RFV13D,2320,Alcoholism
+RFV13D,2321,Drug dependence
+RFV13D,2325,Mental retardation
+RFV13D,2330,Other mental disease
+RFV13D,2350,Multiple sclerosis
+RFV13D,2355,Parkinson's disease (paralysis agitans)
+RFV13D,2360,Epilepsy
+RFV13D,2365,Migraine headache
+RFV13D,2370,Other diseases of central nervous system
+RFV13D,2400,Inflammatory diseases of the eye
+RFV13D,2405,Refractive error
+RFV13D,2410,Cataract
+RFV13D,2415,Glaucoma
+RFV13D,2420,Other diseases of the eye
+RFV13D,2450,Otitis media
+RFV13D,2455,Other diseases of the ear
+RFV13D,2500,Rheumatic fever and chronic rheumatic...
+RFV13D,2505,Hypertension with involvement of targ...
+RFV13D,2510,Hypertension
+RFV13D,2515,Ischemic heart disease
+RFV13D,2520,Other heart disease
+RFV13D,2525,Cerebrovascular disease
+RFV13D,2530,Atherosclerosis
+RFV13D,2535,"Phlebitis, thrombophlebitis"
+RFV13D,2540,Varicose veins
+RFV13D,2545,Hemorrhoids
+RFV13D,2550,Other disease of circulatory system
+RFV13D,2600,Upper respiratory infections except t...
+RFV13D,2605,Tonsillitis
+RFV13D,2610,Bronchitis
+RFV13D,2620,Emphysema
+RFV13D,2625,Asthma
+RFV13D,2630,Pneumonia
+RFV13D,2631,COVID-19
+RFV13D,2632,"COVID-19, virus not identified"
+RFV13D,2633,Vaping-related disorder
+RFV13D,2635,Hay fever
+RFV13D,2636,Personal history of COVID-19
+RFV13D,2637,"Post COVID-10 condition, unspecified"
+RFV13D,2640,Other respiratory diseases
+RFV13D,2650,"Diseases of the esophagus, stomach, a..."
+RFV13D,2655,"Appendicitis, all types"
+RFV13D,2660,Hernia of abdominal cavity
+RFV13D,2665,Diseases of the intestine and peritoneum
+RFV13D,2670,"Diseases of the liver, gallbladder, p..."
+RFV13D,2675,Other diseases of digestive system
+RFV13D,2700,Cystitis
+RFV13D,2705,Urinary tract disease except cystitis
+RFV13D,2710,Diseases of the male genital organs
+RFV13D,2715,Fibrocystic and other diseases of breast
+RFV13D,2720,Pelvic inflammatory disease (PID)
+RFV13D,2725,"Cervicitis, vaginitis"
+RFV13D,2730,Other diseases of female reproductive...
+RFV13D,2735,Diagnosed complications of pregnancy ...
+RFV13D,2736,"Other diseases genitourinary system, NEC"
+RFV13D,2800,"Carbuncle, furuncle, boil, cellulitis..."
+RFV13D,2805,Impetigo
+RFV13D,2810,Seborrheic dermatitis
+RFV13D,2815,"Eczema and dermatitis, NOS"
+RFV13D,2820,Psoriasis
+RFV13D,2825,Other diseases of the skin
+RFV13D,2900,Arthritis
+RFV13D,2905,Nonarticular rheumatism
+RFV13D,2910,Other musculoskeletal or connective t...
+RFV13D,2950,Congenital anomalies of heart and cir...
+RFV13D,2955,Undescended testicles
+RFV13D,2960,Other congenital anomalies
+RFV13D,2980,Prematurity
+RFV13D,2990,All perinatal conditions
+RFV13D,3100,General medical examination
+RFV13D,3103,Encounter for screening for COVID-19
+RFV13D,3105,Well baby examination
+RFV13D,3130,General psychiatric or psychological ...
+RFV13D,3200,"Pregnancy, unconfirmed"
+RFV13D,3205,"Prenatal examination, routine"
+RFV13D,3215,"Postpartum examination, routine"
+RFV13D,3220,Breast examination
+RFV13D,3225,Gynecological examination
+RFV13D,3230,Eye examination
+RFV13D,3235,Heart examination
+RFV13D,3240,Other special examination
+RFV13D,3300,Sensitization test
+RFV13D,3305,Skin immunity test
+RFV13D,3310,Glucose level determination
+RFV13D,3311,SARS-CoV-2 (Coronavirus disease [COVID-19] test
+RFV13D,3314,Human immunodeficiency virus (HIV) test
+RFV13D,3315,Other blood test
+RFV13D,3320,Blood pressure test
+RFV13D,3325,Urine test
+RFV13D,3330,Diagnostic endoscopies
+RFV13D,3335,Biopsies
+RFV13D,3340,"Mammography, xerography, breast therm..."
+RFV13D,3345,Diagnostic radiology
+RFV13D,3350,"EKG, ECG, electrocardiogram, treadmil..."
+RFV13D,3355,"EEG, electroencephalogram"
+RFV13D,3360,Hearing test
+RFV13D,3365,Pap smear
+RFV13D,3370,Other and unspecified diagnostic tests
+RFV13D,3400,Prophylactic inoculations
+RFV13D,3405,Exposure to venereal disease
+RFV13D,3408,Possible HIV
+RFV13D,3409,Exposure to human immunodeficiency vi...
+RFV13D,3410,Exposure to other infectious diseases
+RFV13D,3415,Exposure to bodily fluids of another person
+RFV13D,3500,"Family planning, NOS"
+RFV13D,3505,Contraceptive medication
+RFV13D,3510,Contraceptive device
+RFV13D,3515,Counseling and examinations for pregn...
+RFV13D,3520,Abortion to be performed (at this visit)
+RFV13D,3525,Sterilization to be performed (at thi...
+RFV13D,3530,Artificial insemination
+RFV13D,3535,Preconception Counseling and Education
+RFV13D,4100,Allergy medication
+RFV13D,4110,Injections
+RFV13D,4111,Noncompliance with medication therapy
+RFV13D,4115,"Medication, other and unspecified kinds"
+RFV13D,4200,Preoperative visit for spec/unspec ty...
+RFV13D,4205,Postoperative visit
+RFV13D,4400,Physical medicine and rehabilitation
+RFV13D,4401,Cardiopulmonary resuscitation
+RFV13D,4405,Respiratory therapy
+RFV13D,4410,Psychotherapy
+RFV13D,4415,Radiation therapy
+RFV13D,4420,Acupuncture
+RFV13D,4425,Chemotherapy
+RFV13D,4500,Tube insertion
+RFV13D,4505,"Cauterization, all sites"
+RFV13D,4507,"IV therapy, infusion"
+RFV13D,4510,Urinary tract instrumentation and cat...
+RFV13D,4515,Fitting glasses and contact lenses
+RFV13D,4518,Detoxification
+RFV13D,4520,Minor surgery
+RFV13D,4521,Major surgery
+RFV13D,4525,Kidney dialysis
+RFV13D,4529,Internal prosthetic device
+RFV13D,4530,"Extern prosthet dev, art body parts (..."
+RFV13D,4535,Corrective appliances
+RFV13D,4540,"Cast, splint - application, removal"
+RFV13D,4545,"Dressing, bandage - application, change"
+RFV13D,4550,"Irrigation, lavage"
+RFV13D,4555,"Suture - insertion, removal"
+RFV13D,4556,"Cosmetic injection, NOS"
+RFV13D,4560,Other specific therapeutic procedures...
+RFV13D,4565,Transplants
+RFV13D,4600,Diet and nutritional counseling
+RFV13D,4604,Human immunodeficiency virus (HIV) co...
+RFV13D,4605,"Counseling, NOS"
+RFV13D,4700,Economic problem
+RFV13D,4702,Problem with access to medical care
+RFV13D,4705,Marital problems
+RFV13D,4710,Parent-child problems
+RFV13D,4715,Other problems of family relationship
+RFV13D,4720,Educational problems
+RFV13D,4725,Occupational problems
+RFV13D,4730,Social adjustment problems
+RFV13D,4735,Legal problems
+RFV13D,4740,Other social problems
+RFV13D,4800,"Progress visit, NOS"
+RFV13D,5005,Head and face fractures and dislocations
+RFV13D,5010,Spinal column fractures and dislocations
+RFV13D,5015,"Trunk area, except spinal column, fra..."
+RFV13D,5020,Leg fractures and dislocations
+RFV13D,5025,Ankle fractures and dislocations
+RFV13D,5030,Foot and toe(s) fractures and disloca...
+RFV13D,5035,Arm fractures and dislocations
+RFV13D,5040,Wrist fractures and dislocations
+RFV13D,5045,Hand and finger(s) fractures and disl...
+RFV13D,5050,"Fractures and dislocations, other and..."
+RFV13D,5105,"Cervical spine, neck strains and sprains"
+RFV13D,5110,Back strains and sprains
+RFV13D,5115,Knee strains and sprains
+RFV13D,5120,Ankle strains and sprains
+RFV13D,5125,Wrist strains and sprains
+RFV13D,5130,"Sprain or strain, other and unspecified"
+RFV13D,5205,Head and neck area lacerations and cuts
+RFV13D,5210,Facial area lacerations and cuts
+RFV13D,5215,Trunk area lacerations and cuts
+RFV13D,5220,Lower extremity lacerations and cuts
+RFV13D,5225,Upper extremity lacerations and cuts
+RFV13D,5230,"Laceration and cuts, site unspecified"
+RFV13D,5305,"Head, neck and facial area puncture w..."
+RFV13D,5310,Trunk area puncture wounds
+RFV13D,5315,Lower extremity puncture wounds
+RFV13D,5320,Upper extremity puncture wounds
+RFV13D,5325,"Puncture wound, site unspecified"
+RFV13D,5405,"Head, neck, and face contusion, abras..."
+RFV13D,5410,"Eye contusion, abrasion, bruise"
+RFV13D,5415,"Trunk area contusion, abrasion, bruise"
+RFV13D,5420,"Lower extremity contusion, abrasion, ..."
+RFV13D,5425,"Upper extremity contusion, abrasion, ..."
+RFV13D,5430,"Contusion, abrasion, bruise, site uns..."
+RFV13D,5505,"Head, neck, and face injury, type uns..."
+RFV13D,5510,"Eye injury, type unpsecified"
+RFV13D,5515,"Back injury, type unspecified"
+RFV13D,5520,"Chest and abdomen injury, type unspec..."
+RFV13D,5525,"Hip injury, type unspecified"
+RFV13D,5530,"Leg injury, type unspecified"
+RFV13D,5535,"Knee injury, type unspecified"
+RFV13D,5540,"Ankle injury, type unspecified"
+RFV13D,5545,"Foot and toe(s) injury, type unspecified"
+RFV13D,5550,"Shoulder injury, type unspecified"
+RFV13D,5555,"Arm injury, type unspecified"
+RFV13D,5560,"Elbow injury, type unspecified"
+RFV13D,5565,"Wrist injury, type unspecified"
+RFV13D,5570,"Hand and finger(s) injury, type unspe..."
+RFV13D,5575,"Injury, multiple or unspecified"
+RFV13D,5600,"Eye, foreign body"
+RFV13D,5605,"Nose, foreign body"
+RFV13D,5610,"Skin, foreign body"
+RFV13D,5615,"Digestive tract, foreign body"
+RFV13D,5616,"Respiratory tract, foreign body"
+RFV13D,5620,"Other and unspecified sites, foreign ..."
+RFV13D,5705,"Head, neck, and face burns, all degrees"
+RFV13D,5710,Trunk area burns
+RFV13D,5715,Extremities burns
+RFV13D,5720,"Burn, site unspecified"
+RFV13D,5750,"Sunburn, windburn"
+RFV13D,5755,Insect bites
+RFV13D,5760,"Animal, human bite"
+RFV13D,5800,Late effects of an old injury
+RFV13D,5805,"Motor vehicle accident, type of injur..."
+RFV13D,5810,"Accident, NOS"
+RFV13D,5815,"Violence, NOS"
+RFV13D,5818,Intentional self-mutilation
+RFV13D,5820,Suicide attempt
+RFV13D,5830,Rape
+RFV13D,5835,Dead on arrival (DOA)
+RFV13D,5836,Respiratory arrest
+RFV13D,5837,Cardiac arrest
+RFV13D,5838,Drowning
+RFV13D,5839,Cardiopulmonary arrest
+RFV13D,5840,Unconscious on arrival
+RFV13D,5841,State of consciousness not specified
+RFV13D,5842,Altered level of consciousness
+RFV13D,5900,Accidental poisoning
+RFV13D,5905,Adverse effect of medication
+RFV13D,5910,Adverse effect of drug abuse
+RFV13D,5915,Adverse effect of alcohol
+RFV13D,5916,Alcohol poisoning
+RFV13D,5920,Adverse effects of environment
+RFV13D,5921,Adverse effects of secondhand smoke
+RFV13D,5922,Adverse effects of terrorism and bio..
+RFV13D,5925,"Adverse effects, other and unspecified"
+RFV13D,5930,Surgical complications due to any imp...
+RFV13D,5935,Systemic inflammatory response syndrome (SIRS)
+RFV13D,6100,For results of blood glucose tests
+RFV13D,6105,For results of cholesterol and trigly...
+RFV13D,6106,For results of test for human immunod...
+RFV13D,6110,For other findings of blood tests
+RFV13D,6200,For results of urine tests
+RFV13D,6300,For cytology findings
+RFV13D,6400,For radiological findings
+RFV13D,6500,For results of EKG
+RFV13D,6600,For results of skin tests
+RFV13D,6700,For other and unspecified test results
+RFV13D,7100,Physical examination required for sch...
+RFV13D,7120,Driver's license examination
+RFV13D,7125,Insurance examination
+RFV13D,7130,Disability examination
+RFV13D,7131,Worker's Compensation examination
+RFV13D,7135,Premarital examination
+RFV13D,7137,Direct admission to hospital
+RFV13D,7140,Oth reas for visit requir by party ot...
+RFV13D,8990,"Problems, complaints, NEC"
+RFV13D,8991,Patient unable to speak English
+RFV13D,8993,Patient (or spokesperson) refused care
+RFV13D,8997,Entry of 'none' or 'no complaint'
+RFV13D,8998,Inadequate data base
+RFV13D,8999,Illegible entry
+RFV1,10050,Chills
+RFV1,10100,Fever
+RFV1,10120,Other symptoms of body temperature
+RFV1,10121,Feeling cold
+RFV1,10122,Feeling hot
+RFV1,10123,Feeling hot and cold
+RFV1,10150,"Tiredness, exhaustion"
+RFV1,10200,General weakness
+RFV1,10250,General ill feeling
+RFV1,10300,Fainting (syncope)
+RFV1,10350,Symptoms of fluid abnormalities
+RFV1,10351,Edema
+RFV1,10352,"Excessive sweating, perspiration"
+RFV1,10353,Excessive thirst
+RFV1,10400,Weight gain
+RFV1,10450,Weight loss
+RFV1,10451,Recent weight loss
+RFV1,10452,Underweight
+RFV1,10460,"Symptoms of face, not elsewhere class..."
+RFV1,10500,Chest pain and related symptoms
+RFV1,10501,Chest pain
+RFV1,10502,"Chest discomfort, pressure, tightness"
+RFV1,10503,Burning sensation in the chest
+RFV1,10550,"Pain, specified site not referable to..."
+RFV1,10551,Rib pain
+RFV1,10552,"Side pain, flank pain"
+RFV1,10553,Groin pain
+RFV1,10554,Facial pain
+RFV1,10600,"Pain and related symptoms, generalize..."
+RFV1,10601,"Pain, unspecified"
+RFV1,10602,"Cramps, spasms, site unspecified"
+RFV1,10603,"Stiffness, site unspecified"
+RFV1,10650,"Tumor or mass, site unspecified"
+RFV1,10651,"Internal mass, NOS"
+RFV1,10660,"Lesion, Internal, NOS (excludes brain and skin)"
+RFV1,10700,"Bleeding, multiple or unspecified sites"
+RFV1,10750,Symptoms of growth and developmental ...
+RFV1,10751,Lack of growth
+RFV1,10752,Excessive growth
+RFV1,10800,"General symptoms of infants, NEC"
+RFV1,10801,"Infant crying too much, fussy, fidget..."
+RFV1,10802,"Infant regurgitation, spitting up"
+RFV1,10803,Infant feeding problem
+RFV1,10850,General or unspecified nonviral infec...
+RFV1,10900,"Allergy, NOS"
+RFV1,10950,Disorders of motor functions
+RFV1,10960,"Dyslexia, NOS"
+RFV1,11000,Anxiety and nervousness
+RFV1,11050,Fears and phobias
+RFV1,11100,Depression
+RFV1,11150,Anger
+RFV1,11200,Problems with identity and self-esteem
+RFV1,11230,Transgender
+RFV1,11250,Restlessness
+RFV1,11300,Behavioral disturbances
+RFV1,11301,Antisocial behavior
+RFV1,11302,Hostile behavior
+RFV1,11303,Hysterical behavior
+RFV1,11304,Temper problems
+RFV1,11305,Obsessions and compulsions
+RFV1,11350,Disturbances of sleep
+RFV1,11351,Insomnia
+RFV1,11352,Sleepiness (hypersomnia)
+RFV1,11353,Nightmares
+RFV1,11354,Sleepwalking
+RFV1,11355,Sleep apnea
+RFV1,11400,Smoking problems
+RFV1,11450,Alcohol-related problems
+RFV1,11500,Abnormal drug usage
+RFV1,11501,"Substance abuse, NOS"
+RFV1,11550,Delusions or hallucinations
+RFV1,11600,Psychosexual disorders
+RFV1,11601,"Frigidity, loss of sex drive, lack of..."
+RFV1,11602,"Homosexuality, concerns with"
+RFV1,11603,Impotence
+RFV1,11604,Premature ejaculation
+RFV1,11605,"Masturbation excessive, concerns about"
+RFV1,11606,"Orgasm, problem with"
+RFV1,11607,Preoccupation with sex
+RFV1,11650,Oth symptoms/problems relat to psycho...
+RFV1,11651,Nailbiting
+RFV1,11652,Thumbsucking
+RFV1,12000,Abnormal involuntary movements
+RFV1,12050,Convulsions
+RFV1,12070,"Symptoms of head, NEC"
+RFV1,12100,"Headache, pain in head"
+RFV1,12101,Tension headache
+RFV1,12150,"Memory, disturbances of"
+RFV1,12200,Disturbances of sensation
+RFV1,12201,Loss of feeling (anesthesia)
+RFV1,12202,Increased sensation (hyperesthesia)
+RFV1,12203,Abnormal sensation (paresthesia)
+RFV1,12204,"Other disturbances of sense, includin..."
+RFV1,12250,Vertigo - dizziness
+RFV1,12300,Weakness (neurologic)
+RFV1,12350,"Disorders of speech, speech disturbance"
+RFV1,12351,"Stuttering, stammering"
+RFV1,12352,Slurring
+RFV1,12400,Other symptoms referable to the nervo...
+RFV1,12600,Abnormal pulsations and palpitations
+RFV1,12601,Increased heartbeat
+RFV1,12602,Decreased heartbeat
+RFV1,12603,Irregular heartbeat
+RFV1,12650,Heart pain
+RFV1,12700,Other symptoms of the heart
+RFV1,12750,Symptoms of lymph glands (or nodes)
+RFV1,12751,Swollen or enlarged glands
+RFV1,12752,Sore glands
+RFV1,12800,Other symptoms ref to the cardiovas/l...
+RFV1,12801,Poor circulation
+RFV1,12802,"Pallor, paleness"
+RFV1,12803,"Flushed, blushing"
+RFV1,13050,Vision dysfunctions
+RFV1,13051,Blindness and half vision
+RFV1,13052,Diminished vision
+RFV1,13053,Extraneous vision
+RFV1,13054,Double vision (diplopia)
+RFV1,13100,Discharge from eye
+RFV1,13101,Discharge from eye--bleeding
+RFV1,13102,"Discharge from eye--tearing, watering..."
+RFV1,13103,"Discharge from eye--pus, matter, whit..."
+RFV1,13150,Eye infection and inflammation
+RFV1,13151,Pinkeye
+RFV1,13200,Abnormal sensations of the eye
+RFV1,13201,Eye pain
+RFV1,13202,Eye itching
+RFV1,13203,Eye burning
+RFV1,13204,Eye strain
+RFV1,13250,Abnormal eye movements
+RFV1,13251,Abnormal retraction of eye
+RFV1,13252,Cross-eyed
+RFV1,13253,Pupils unequal
+RFV1,13254,Deviation of eyes
+RFV1,13300,Abnormal appearance of eyes
+RFV1,13301,Abnormal color of eyes
+RFV1,13302,Protrusion (exophthalmos) of eyes
+RFV1,13303,"Cloudy, dull, hazy appearance of eyes"
+RFV1,13350,Other and unspecified symptoms refera...
+RFV1,13351,Contact lens problems
+RFV1,13352,Allergy problems referable to eye
+RFV1,13353,Swelling of eyes
+RFV1,13400,Symptoms of eyelids
+RFV1,13401,"Infection, inflammation, swelling of ..."
+RFV1,13402,Itching of eyelids
+RFV1,13403,Mass or growth of eyelids
+RFV1,13404,Abnormal movement of eyelids
+RFV1,13450,Hearing dysfunctions
+RFV1,13451,Diminished hearing
+RFV1,13452,Heightened or acute hearing
+RFV1,13453,Extraneous hearing
+RFV1,13500,Discharge from ear
+RFV1,13501,Bleeding of ear
+RFV1,13502,Pus (purulent drainage) from ear
+RFV1,13503,Swimmer's ear
+RFV1,13550,"Earache, or ear infection"
+RFV1,13551,"Earache, pain"
+RFV1,13552,Ear infection
+RFV1,13600,Plugged feeling in ear
+RFV1,13650,Other and unspecified symptoms refera...
+RFV1,13651,Itching of ears
+RFV1,13652,Growths or mass of ears
+RFV1,13653,"Pulling at ears, picking at ears"
+RFV1,13654,"Abnormal size or shape of ears, ears..."
+RFV1,14000,Nasal congestion
+RFV1,14050,Other symptoms of nose
+RFV1,14051,Nosebleed (epistaxis)
+RFV1,14052,Sore in nose
+RFV1,14053,Inflammation and swelling of nose
+RFV1,14054,Problem with appearance of nose
+RFV1,14100,Sinus problems
+RFV1,14101,Sinus pain and pressure
+RFV1,14102,"Sinus inflammation, infection"
+RFV1,14103,Sinus congestion
+RFV1,14150,Shortness of breath
+RFV1,14200,Labored or difficult breathing (dyspnea)
+RFV1,14250,Wheezing
+RFV1,14300,"Breathing problems, NEC"
+RFV1,14301,"Disorders of respiratory sound, NEC"
+RFV1,14302,Rapid breathing (hyperventilation)
+RFV1,14350,Sneezing
+RFV1,14400,Cough
+RFV1,14450,"Head cold, upper respiratory infectio..."
+RFV1,14500,General viral infection
+RFV1,14501,Flu
+RFV1,14550,Symptoms referable to throat
+RFV1,14551,Throat soreness
+RFV1,14552,Throat pain
+RFV1,14553,Throat infection
+RFV1,14554,"Throat irritation, scratch, tickle"
+RFV1,14555,Throat swelling
+RFV1,14556,Throat lump or mass
+RFV1,14600,Symptoms referable to tonsils
+RFV1,14700,Abnormalities of sputum or phlegm
+RFV1,14701,Coughing up blood
+RFV1,14702,Pus in sputum
+RFV1,14703,Excessive sputum
+RFV1,14750,Congestion in chest
+RFV1,14800,Disorders of voice
+RFV1,14801,"Hoarseness, loss of voice"
+RFV1,14802,Hypernasality
+RFV1,14850,Other symptoms referable to the respi...
+RFV1,14851,Lung pain
+RFV1,14852,Lung infection
+RFV1,15000,Symptoms of teeth and gums
+RFV1,15001,Toothache
+RFV1,15002,Gum pain
+RFV1,15003,Bleeding gums
+RFV1,15010,"Symptoms of the jaw, NOS"
+RFV1,15011,"Symptoms of the jaw, swelling"
+RFV1,15012,"Symptoms of the jaw, lump or mass"
+RFV1,15050,Symptoms referable to lips
+RFV1,15051,"Cracked, bleeding, dry lips"
+RFV1,15052,Abnormal color of lips
+RFV1,15053,Cold sore
+RFV1,15100,Symptoms referable to mouth
+RFV1,15101,"Mouth pain, burning, soreness"
+RFV1,15102,Mouth bleeding
+RFV1,15103,Mouth dryness
+RFV1,15104,"Mouth ulcer, sore"
+RFV1,15150,Symptoms referable to tongue
+RFV1,15151,Tongue pain
+RFV1,15152,Tongue bleeding
+RFV1,15153,"Tongue inflammation, infection, swelling"
+RFV1,15154,"Abnormal color, ridges, coated tongue"
+RFV1,15200,Difficulty in swallowing (dysphagia)
+RFV1,15250,Nausea
+RFV1,15300,Vomiting
+RFV1,15350,Heartburn and indigestion (dyspepsia)
+RFV1,15400,Gastrointestinal infection
+RFV1,15450,"Stomach and abdominal pain, cramps an..."
+RFV1,15451,"Abdominal pain, cramps, spasms, NOS"
+RFV1,15452,"Lower abdominal pain, cramps, spasms,"
+RFV1,15453,"Upper abdominal pain, cramps, spasms"
+RFV1,15650,Change in abdominal size
+RFV1,15651,"Abdominal distention, fullness, NOS"
+RFV1,15652,Abdominal mass or tumor
+RFV1,15653,"Abdominal swelling, NOS"
+RFV1,15700,"Appetite, abnormal"
+RFV1,15701,Excessive appetite
+RFV1,15702,Decreased appetite
+RFV1,15750,Difficulty eating
+RFV1,15800,Gastrointestinal bleeding
+RFV1,15801,Blood in stool (melena)
+RFV1,15802,Vomiting blood (hematemesis)
+RFV1,15850,Flatulence
+RFV1,15900,Constipation
+RFV1,15950,Diarrhea
+RFV1,16000,Other symptoms or changes in bowel fu...
+RFV1,16001,Discharge in stools
+RFV1,16002,Worms
+RFV1,16003,"Changes in size, color, shape, or odo..."
+RFV1,16004,Incontinence of stool
+RFV1,16050,Symptoms referable to anus-rectum
+RFV1,16051,Anal-rectal pain
+RFV1,16052,Anal-rectal bleeding
+RFV1,16053,Anal-rectal swelling or mass
+RFV1,16054,Anal-rectal itching
+RFV1,16100,"Symptoms of liver, gallbladder, and b..."
+RFV1,16101,"Pain of liver, gallbladder, and bilia..."
+RFV1,16102,Jaundice
+RFV1,16150,Other and unspecified symptoms refera...
+RFV1,16400,Abnormalities of urine
+RFV1,16401,Blood in urine (hematuria)
+RFV1,16402,Pus in urine
+RFV1,16403,Unusual color or odor of urine
+RFV1,16450,Frequency and urgency of urination
+RFV1,16451,"Excessive urination, night (nocturia)"
+RFV1,16500,Painful urination
+RFV1,16550,Incontinence of urine (enuresis)
+RFV1,16551,"Involuntary urination, can't hold uri..."
+RFV1,16552,Bedwetting
+RFV1,16600,Other urinary dysfunctions
+RFV1,16601,Retention of urine
+RFV1,16602,Urinary hesitancy
+RFV1,16603,Large volume of urine
+RFV1,16604,Small volume of urine
+RFV1,16650,Symptoms of bladder
+RFV1,16651,Bladder pain
+RFV1,16652,Bladder infection
+RFV1,16653,Bladder mass
+RFV1,16700,Symptoms of the kidneys
+RFV1,16701,Kidney pain
+RFV1,16702,Kidney infection
+RFV1,16703,Symptoms of the kidneys -- mass
+RFV1,16750,"Urinary tract infection, NOS"
+RFV1,16800,Other symptoms referable to urinary t...
+RFV1,17000,Symptoms of penis
+RFV1,17001,"Pain, aching, soreness, tenderness, p..."
+RFV1,17002,"Infection, inflammation, swelling of ..."
+RFV1,17003,"Lumps, bumps, growths, warts of penis"
+RFV1,17050,Penile discharge
+RFV1,17100,Symptoms of prostate
+RFV1,17101,Swelling of prostate
+RFV1,17102,Infection of prostate
+RFV1,17150,Symptoms of the scrotum and testes
+RFV1,17151,"Pain, aching, tenderness of the scrot..."
+RFV1,17152,"Swelling, inflammation of the scrotum..."
+RFV1,17153,"Growths, warts, lumps, bumps of the s..."
+RFV1,17154,"Itching, jock itch of the scrotum and..."
+RFV1,17200,Other symptoms of male reproductive s...
+RFV1,17300,Absence of menstruation (amenorrhea)
+RFV1,17350,Irregularity of menstrual interval
+RFV1,17351,Frequent menstrual interval
+RFV1,17352,Infrequent menstrual interval
+RFV1,17353,Unpredictable menstrual interval
+RFV1,17400,Irregularity of menstrual flow
+RFV1,17401,Excessively heavy (menorrhagia) menst...
+RFV1,17402,Scanty flow (oligomenorrhea) menstrua...
+RFV1,17403,"Abnormal material in menstrual flow, ..."
+RFV1,17450,"Menstrual symptoms, other and unspeci..."
+RFV1,17451,Premenstrual symptoms
+RFV1,17452,Painful menstruation (dysmenorrhea)
+RFV1,17500,Menopausal symptoms
+RFV1,17501,Early or late onset of menopause
+RFV1,17502,Vasomotor symptoms-hot flashes
+RFV1,17503,"Emotional symptoms, change of life pr..."
+RFV1,17550,Uterine and vaginal bleeding
+RFV1,17551,Intermenstrual bleeding (metrorrhagia)
+RFV1,17552,Postmenopausal bleeding
+RFV1,17553,"Postcoital bleeding, female"
+RFV1,17600,Vaginal discharge
+RFV1,17650,Other vaginal symptoms
+RFV1,17651,Vaginal pain
+RFV1,17652,Vaginal infection
+RFV1,17653,"Vaginal itching, burning"
+RFV1,17654,Vaginal dryness
+RFV1,17700,Vulvar disorders
+RFV1,17701,"Vulvar itching and irritation, swelling"
+RFV1,17702,"Vulvar mass, lump"
+RFV1,17703,"Vulvar growth, wart, cyst, ulcer, sore"
+RFV1,17750,Pelvic symptoms
+RFV1,17751,Pelvic pain
+RFV1,17752,Pelvic pressure or dropping sensation
+RFV1,17753,"Pelvic infection, inflammation"
+RFV1,17900,Problems of pregnancy
+RFV1,17901,Pain during pregnancy
+RFV1,17902,"Spotting, bleeding during pregnancy"
+RFV1,17903,Symptoms of onset of labor
+RFV1,17910,Postpartum problems
+RFV1,17950,Other symptoms referable to the femal...
+RFV1,18000,Pain or soreness of breast
+RFV1,18050,Lump or mass of breast
+RFV1,18100,Other symptoms referable to breast
+RFV1,18101,Bleeding or discharge from nipple of ...
+RFV1,18102,Postpartum problems of breast
+RFV1,18103,Problems with shape or size of breast
+RFV1,18150,Symptoms of infertility
+RFV1,18200,Hormone deficiency or problem
+RFV1,18250,Symptoms of sexual dysfunction
+RFV1,18300,Acne or pimples
+RFV1,18350,Discoloration or abnormal pigmentation
+RFV1,18400,"Infections of skin, NOS"
+RFV1,18401,Infection of skin of head or neck area
+RFV1,18402,"Infection of skin of arm, hand, or fi..."
+RFV1,18403,"Infection of skin of leg, foot, or toe"
+RFV1,18450,Symptoms of skin moles
+RFV1,18451,Change in size or color of skin moles
+RFV1,18452,Bleeding mole
+RFV1,18500,"Warts, NOS"
+RFV1,18550,Other growths of skin
+RFV1,18600,Skin rash
+RFV1,18601,Diaper rash
+RFV1,18650,Skin lesion
+RFV1,18700,"Skin irritations, NEC"
+RFV1,18701,Skin pain
+RFV1,18702,Skin itching
+RFV1,18750,Swelling of skin
+RFV1,18800,Other symptoms referable to skin
+RFV1,18801,Oiliness of skin
+RFV1,18802,"Dryness, peeling, scaliness, roughnes..."
+RFV1,18803,Wrinkles of skin
+RFV1,18850,Symptoms referable to nails
+RFV1,18851,Infected nails
+RFV1,18852,Ingrown nails
+RFV1,18853,"Brittle, breaking, splitting, cracked..."
+RFV1,18900,Symptoms referable to hair and scalp
+RFV1,18901,Too little hair
+RFV1,18902,Unwanted hair
+RFV1,18903,"Dryness, flaky scalp"
+RFV1,18904,Itching of scalp
+RFV1,18950,Navel problems
+RFV1,19000,Neck symptoms
+RFV1,19001,"Neck pain, ache, soreness, discomfort"
+RFV1,19002,"Neck cramps, contractures, spasms"
+RFV1,19003,"Limitation of movement, stiffness of ..."
+RFV1,19004,Weakness of neck
+RFV1,19005,Swelling of neck
+RFV1,19006,"Lump, mass, tumor of neck"
+RFV1,19050,Back symptoms
+RFV1,19051,"Back pain, ache, soreness, discomfort"
+RFV1,19052,"Back cramps, contractures, spasms"
+RFV1,19053,"Limitation of movement, stiffness of ..."
+RFV1,19054,Weakness of back
+RFV1,19055,Swelling of back
+RFV1,19056,"Lump, mass, tumor of back"
+RFV1,19100,Low back symptoms
+RFV1,19101,"Low back pain, ache, soreness, discom..."
+RFV1,19102,"Low back cramps, contractures, spasms"
+RFV1,19103,"Limitation of movement, stiffness of ..."
+RFV1,19104,Weakness of lower back
+RFV1,19105,Swelling of lower back
+RFV1,19106,"Lump, mass, tumor of lower back"
+RFV1,19150,Hip symptoms
+RFV1,19151,"Hip pain, ache, soreness, discomfort"
+RFV1,19152,"Hip cramps, contractures, spasms"
+RFV1,19153,"Limitation of movement, stiffness of hip"
+RFV1,19154,Weakness of hip
+RFV1,19155,Swelling of hip
+RFV1,19156,"Lump, mass, tumor of hip"
+RFV1,19200,Leg symptoms
+RFV1,19201,"Leg pain, ache, soreness, discomfort"
+RFV1,19202,"Leg cramps, contractures, spasms"
+RFV1,19203,"Limitation of movement, stiffness of leg"
+RFV1,19204,Weakness of leg
+RFV1,19205,Swelling of leg
+RFV1,19206,"Lump, mass, tumor of leg"
+RFV1,19250,Knee symptoms
+RFV1,19251,"Knee pain, ache, soreness, discomfort"
+RFV1,19252,"Knee cramps, contractures, spasms"
+RFV1,19253,"Limitation of movement, stiffness of ..."
+RFV1,19254,Weakness of knee
+RFV1,19255,Swelling of knee
+RFV1,19256,"Lump, mass, tumor of knee"
+RFV1,19300,Ankle symptoms
+RFV1,19301,"Ankle pain, ache, soreness, discomfort"
+RFV1,19302,"Ankle cramps, contractures, spasms"
+RFV1,19303,"Limitation of movement, stiffness of ..."
+RFV1,19304,Weakness of ankle
+RFV1,19305,Swelling of ankle
+RFV1,19306,"Lump, mass, tumor of ankle"
+RFV1,19350,Foot and toe symptoms
+RFV1,19351,"Foot and toe pain, ache, soreness, di..."
+RFV1,19352,"Foot and toe cramps, contractures, sp..."
+RFV1,19353,"Limitation of movement, stiffness of ..."
+RFV1,19354,Weakness of foot and toe
+RFV1,19355,Swelling of foot and toe
+RFV1,19356,"Lump, mass, tumor of foot and toe"
+RFV1,19400,Shoulder symptoms
+RFV1,19401,"Shoulder pain, ache, soreness, discom..."
+RFV1,19402,"Shoulder cramps, contractures, spasms"
+RFV1,19403,"Limitation of movement, stiffness of ..."
+RFV1,19404,Weakness of shoulder
+RFV1,19405,Swelling of shoulder
+RFV1,19406,"Lump, mass, tumor of shoulder"
+RFV1,19450,Arm symptoms
+RFV1,19451,"Arm pain, ache, soreness, discomfort"
+RFV1,19452,"Arm cramps, contractures, spasms"
+RFV1,19453,"Limitation of movement, stiffness of arm"
+RFV1,19454,Weakness of arm
+RFV1,19455,Swelling of arm
+RFV1,19456,"Lump, mass, tumor of arm"
+RFV1,19500,Elbow symptoms
+RFV1,19501,"Elbow pain, ache, soreness, discomfort"
+RFV1,19502,"Elbow cramps, contractures, spasms"
+RFV1,19503,"Limitation of movement, stiffness of ..."
+RFV1,19504,Weakness of elbow
+RFV1,19505,Swelling of elbow
+RFV1,19506,"Lump, mass, tumor of elbow"
+RFV1,19550,Wrist symptoms
+RFV1,19551,"Wrist pain, ache, soreness, discomfort"
+RFV1,19552,"Wrist cramps, contractures, spasms"
+RFV1,19553,"Limitation of movement, stiffness of ..."
+RFV1,19554,Weakness of wrist
+RFV1,19555,Swelling of wrist
+RFV1,19556,"Lump, mass, tumor of wrist"
+RFV1,19600,Hand and finger symptoms
+RFV1,19601,"Hand and finger pain, ache, soreness,..."
+RFV1,19602,"Hand and finger cramps, contractures,..."
+RFV1,19603,"Limitation of movement, stiffness of ..."
+RFV1,19604,Weakness of hand and finger
+RFV1,19605,Swelling of hand and finger
+RFV1,19606,"Lump, mass, tumor of hand and finger"
+RFV1,19650,Symptoms of unspecified muscles
+RFV1,19651,"Unspecified muscle pain, ache, sorene..."
+RFV1,19652,"Unspecified muscle cramps, contractur..."
+RFV1,19653,"Limitation of movement, stiffness of ..."
+RFV1,19654,Weakness of unspecified muscles
+RFV1,19655,Swelling of unspecified muscles
+RFV1,19656,"Lump, mass, tumor of unspecified muscles"
+RFV1,19700,Symptoms of unspecified joints
+RFV1,19701,"Unspecified joint pain, ache, sorenes..."
+RFV1,19702,"Unspecified joint cramps, contracture..."
+RFV1,19703,"Limitation of movement, stiffness of ..."
+RFV1,19704,Weakness of unspecified joints
+RFV1,19705,Swelling of unspecified joints
+RFV1,19706,"Lump, mass, tumor of unspecified joints"
+RFV1,19750,Musculoskeletal deformities
+RFV1,19751,"Bowlegged, knock-kneed"
+RFV1,19752,Posture problems
+RFV1,19753,"Pigeon-toed, feet turn in"
+RFV1,19800,Other musculoskeletal symptoms
+RFV1,20050,Intestinal infectious diseases
+RFV1,20100,Streptococcal infection
+RFV1,20150,Viral diseases
+RFV1,20151,HIV with or without associated conditions
+RFV1,20160,"Coronavirus infection, unspecified"
+RFV1,20170,SARS-assoc coronavirus cause of dis class...
+RFV1,20171,Other coronavirus cause of dis class...
+RFV1,20200,Venereal diseases
+RFV1,20250,Fungus infections (mycoses)
+RFV1,20300,Parasitic diseases
+RFV1,20310,"Sepsis, septicemia"
+RFV1,20350,Other and unspecified infectious and ...
+RFV1,21000,"Cancer, gastrointestinal tract"
+RFV1,21050,"Cancer, respiratory tract"
+RFV1,21100,"Cancer, skin and subcutaneous tissues"
+RFV1,21150,"Cancer, breast"
+RFV1,21200,"Cancer, female genital tract"
+RFV1,21250,"Cancer, male genital tract"
+RFV1,21260,Cancer of urinary tract
+RFV1,21300,Other malignant neoplasms
+RFV1,21350,"Hodgkin's disease, lymphomata, leukemias"
+RFV1,21400,Fibroids and other uterine neoplasms
+RFV1,21450,Other benign neoplasms
+RFV1,21500,Neoplasm of uncertain nature
+RFV1,22000,Diseases of the thyroid gland
+RFV1,22010,Diabetic skin ulcer (wound check)
+RFV1,22050,Diabetes mellitus
+RFV1,22100,"Gout, hyperuricemia"
+RFV1,22150,"Other endocrine, nutritional, and met..."
+RFV1,22500,Anemia
+RFV1,22550,Other diseases of blood and blood-for...
+RFV1,23000,Organic psychoses
+RFV1,23050,Functional psychoses
+RFV1,23100,Neuroses
+RFV1,23150,Personality and character disorders
+RFV1,23200,Alcoholism
+RFV1,23210,Drug dependence
+RFV1,23250,Mental retardation
+RFV1,23300,Other and unspecified mental disorders
+RFV1,23301,Attention deficit disorder (ADD)
+RFV1,23500,Multiple sclerosis
+RFV1,23550,Parkinson's disease (paralysis agitans)
+RFV1,23600,Epilepsy
+RFV1,23650,Migraine headache
+RFV1,23700,Other and unspecified diseases of the...
+RFV1,24000,Inflammatory diseases of the eye
+RFV1,24050,Refractive error
+RFV1,24100,Cataract
+RFV1,24150,Glaucoma
+RFV1,24200,Other diseases of the eye
+RFV1,24500,Otitis media
+RFV1,24550,Other diseases of the ear
+RFV1,25000,Rheumatic fever and chronic rheumatic...
+RFV1,25050,Hypertension with involvement of targ...
+RFV1,25100,Hypertension
+RFV1,25150,Ischemic heart disease
+RFV1,25200,Other heart disease
+RFV1,25250,Cerebrovascular disease
+RFV1,25300,Atherosclerosis
+RFV1,25350,"Phlebitis, thrombophlebitis"
+RFV1,25400,Varicose veins
+RFV1,25450,Hemorrhoids
+RFV1,25500,Other disease of circulatory system
+RFV1,26000,Upper respiratory infections except t...
+RFV1,26050,Tonsillitis
+RFV1,26100,Bronchitis
+RFV1,26200,Emphysema
+RFV1,26250,Asthma
+RFV1,26300,Pneumonia
+RFV1,26301,Pneumonia due to SARS-associated coronavirus
+RFV1,26310,COVID-19
+RFV1,26320,"COVID-19, virus not identified"
+RFV1,26330,Vaping-related disorder
+RFV1,26350,Hay fever
+RFV1,26360,Personal history of COVID-19
+RFV1,26370,"Post COVID-10 condition, unspecified"
+RFV1,26400,Other respiratory diseases
+RFV1,26500,"Diseases of the esophagus, stomach, a..."
+RFV1,26550,"Appendicitis, all types"
+RFV1,26600,Hernia of abdominal cavity
+RFV1,26650,Diseases of the intestine and peritoneum
+RFV1,26700,"Diseases of the liver, gallbladder, a..."
+RFV1,26750,Other diseases of digestive system
+RFV1,26751,Dental abscess
+RFV1,26752,Dental cavities
+RFV1,26753,Canker sore
+RFV1,26755,Temperomandibular joint (TMJ) pain
+RFV1,27000,Cystitis
+RFV1,27050,Urinary tract disease except cystitis
+RFV1,27100,Diseases of the male genital organs
+RFV1,27150,Fibrocystic and other diseases of breast
+RFV1,27200,Pelvic inflammatory disease (PID)
+RFV1,27250,"Cervicitis, vaginitis"
+RFV1,27300,Other diseases of female reproductive...
+RFV1,27350,Diagnosed complications of pregnancy ...
+RFV1,27360,"Other diseases genitourinary system, NEC"
+RFV1,28000,"Carbuncle, furuncle, boil, cellulitis..."
+RFV1,28050,Impetigo
+RFV1,28100,Seborrheic dermatitis
+RFV1,28150,"Eczema and dermatitis, NOS"
+RFV1,28200,Psoriasis
+RFV1,28250,Other diseases of the skin
+RFV1,29000,Arthritis
+RFV1,29050,Nonarticular rheumatism
+RFV1,29100,Other musculoskeletal or connective t...
+RFV1,29500,Congenital anomalies of heart and cir...
+RFV1,29550,Undescended testicles
+RFV1,29600,Other and unspecified congenital anom...
+RFV1,29800,Prematurity
+RFV1,29900,All other perinatal conditions
+RFV1,31000,General medical examination
+RFV1,31030,Encounter for screening for COVID-19
+RFV1,31050,Well baby examination
+RFV1,31300,General psychiatric or psychological ...
+RFV1,32000,"Pregnancy, unconfirmed"
+RFV1,32050,"Prenatal examination, routine"
+RFV1,32150,"Postpartum examination, routine"
+RFV1,32200,Breast examination
+RFV1,32250,Gynecological examination
+RFV1,32300,Eye examination
+RFV1,32350,Heart examination
+RFV1,32400,Other special examination
+RFV1,33000,Sensitization test
+RFV1,33050,Skin immunity test
+RFV1,33100,Glucose level determination
+RFV1,33110,SARS-CoV-2 (Coronavirus disease [COVID-19]) test
+RFV1,33111,SARS-CoV-2 (Coronavirus disease [COVID-19]) antibody test
+RFV1,33140,Human immunodeficiency virus (HIV) test
+RFV1,33150,Other blood test
+RFV1,33151,Blood test for venereal disease
+RFV1,33200,Blood pressure test
+RFV1,33250,Urine test
+RFV1,33300,Diagnostic endoscopies
+RFV1,33350,Biopsies
+RFV1,33400,"Mammography, xerography, breast therm..."
+RFV1,33450,Diagnostic radiology
+RFV1,33500,"EKG, ECG, electrocardiogram, treadmil..."
+RFV1,33550,"EEG, electroencephalogram"
+RFV1,33600,Hearing test
+RFV1,33650,Pap smear
+RFV1,33700,Other and unspecified diagnostic tests
+RFV1,33701,Glaucoma test
+RFV1,33702,Throat culture
+RFV1,33703,Heart catheterization
+RFV1,33704,Other cultures
+RFV1,34000,Prophylactic inoculations
+RFV1,34001,COVID-19 immunization
+RFV1,34050,Exposure to venereal disease
+RFV1,34080,Possible HIV
+RFV1,34090,Exposure to human immunodeficiency vi...
+RFV1,34100,Exposure to other infectious diseases
+RFV1,34150,Exposure to bodily fluids of another ...
+RFV1,35000,"Family planning, NOS"
+RFV1,35050,Contraceptive medication
+RFV1,35100,Contraceptive device
+RFV1,35150,Counseling and examinations for pregn...
+RFV1,35200,Abortion to be performed (at this visit)
+RFV1,35250,Sterilization to be performed (at thi...
+RFV1,35300,Artificial insemination
+RFV1,35350,Preconception Counseling and Education
+RFV1,41000,Allergy medication
+RFV1,41100,Injections
+RFV1,41110,Noncompliance with medication therapy
+RFV1,41150,"Medication, other and unspecified kinds"
+RFV1,42000,Preoperative visit for specified/unsp...
+RFV1,42050,Postoperative visit
+RFV1,44000,Physical medicine and rehabilitation
+RFV1,44010,Cardiopulmonary resuscitation
+RFV1,44050,Respiratory therapy
+RFV1,44100,Psychotherapy
+RFV1,44101,Group counseling
+RFV1,44150,Radiation therapy
+RFV1,44200,Acupuncture
+RFV1,44250,Chemotherapy
+RFV1,45000,Tube insertion
+RFV1,45050,"Cauterization, all sites"
+RFV1,45070,"IV therapy, infusion"
+RFV1,45100,Urinary tract instrumentation and cat...
+RFV1,45150,Fitting glasses and contact lenses
+RFV1,45180,Detoxification
+RFV1,45181,Alcohol detoxification
+RFV1,45182,Drug detoxification
+RFV1,45200,Minor surgery
+RFV1,45201,Wart removed
+RFV1,45210,Major surgery
+RFV1,45250,Kidney dialysis
+RFV1,45290,Internal prosthetic device
+RFV1,45300,"External prosthetic devices, artifici..."
+RFV1,45350,Corrective appliances
+RFV1,45400,"Cast, splint - application, removal"
+RFV1,45450,"Dressing, bandage - application, change"
+RFV1,45500,"Irrigation, lavage"
+RFV1,45550,"Suture - insertion, removal"
+RFV1,45560,"Cosmetic injection, NOS"
+RFV1,45561,Botox injection
+RFV1,45600,Other specific therapeutic procedures...
+RFV1,45650,"Transplant, NOS"
+RFV1,45651,"Transplant, failure"
+RFV1,45652,"Transplant, rejection"
+RFV1,46000,Diet and nutritional counseling
+RFV1,46040,Human immunodeficiency virus (HIV) co...
+RFV1,46050,"Medical counseling, NOS"
+RFV1,46051,Family history of cardiovascular disease
+RFV1,46052,Family history of cancer
+RFV1,46053,Family history of diabetes
+RFV1,46054,Family history of other disease or co...
+RFV1,47000,Economic problem
+RFV1,47020,Problem with access to medical care
+RFV1,47050,Marital problems
+RFV1,47100,Parent-child problems
+RFV1,47150,Other problems of family relationship
+RFV1,47200,Educational problems
+RFV1,47250,Occupational problems
+RFV1,47300,Social adjustment problems
+RFV1,47350,Legal problems
+RFV1,47351,Police involvement in outpatient visi...
+RFV1,47400,Other social problems
+RFV1,48000,"Progress visit, NOS"
+RFV1,50050,Fracture/dislocation of head and face
+RFV1,50100,Fracture/dislocation of spinal column
+RFV1,50150,"Fracture/dislocation of trunk area, e..."
+RFV1,50200,Fracture/dislocation of leg
+RFV1,50250,Fracture/dislocation of ankle
+RFV1,50300,Fracture/dislocation of foot and toes
+RFV1,50350,Fracture/dislocation of arm
+RFV1,50400,Fracture/dislocation of wrist
+RFV1,50450,Fracture/dislocation of hand and fingers
+RFV1,50500,"Fracture, other and unspecified"
+RFV1,51050,"Sprain and strain of cervical spine, ..."
+RFV1,51100,Sprain and strain of back
+RFV1,51150,Sprain and strain of knee
+RFV1,51200,Sprain and strain of ankle
+RFV1,51250,Sprain and strain of wrist
+RFV1,51300,"Sprain or strain, other and unspecified"
+RFV1,52050,Laceration/cut of head and neck area
+RFV1,52100,Laceration/cut of facial area
+RFV1,52150,Laceration/cut of trunk area
+RFV1,52200,Laceration/cut of lower extremity
+RFV1,52250,Laceration/cut of upper extremity
+RFV1,52300,"Laceration/cut, site unspecified"
+RFV1,53050,"Puncture wound of head, neck and faci..."
+RFV1,53100,Puncture wound of trunk area
+RFV1,53150,Puncture wound of lower extremity
+RFV1,53200,Puncture wound of upper extremity
+RFV1,53250,"Puncture wound, site unspecified"
+RFV1,54050,"Contusions/abrasions/bruises of head,..."
+RFV1,54100,Contusions/abrasions/bruises of eye
+RFV1,54150,Contusions/abrasions/bruises of trunk...
+RFV1,54200,Contusions/abrasions/bruises of lower...
+RFV1,54250,Contusions/abrasions/bruises of upper...
+RFV1,54300,"Contusion/abrasion/bruise, site unspe..."
+RFV1,55050,"Injury, other and unspecified of head..."
+RFV1,55100,"Injury, other and unspecified, of eye"
+RFV1,55150,"Injury, other and unspecified, of back"
+RFV1,55200,"Injury, other and unspecified, of che..."
+RFV1,55250,"Injury, other and unspecified, of hip"
+RFV1,55300,"Injury, other and unspecified, of leg"
+RFV1,55350,"Injury, other and unspecified, of knee"
+RFV1,55400,"Injury, other and unspecified, of ankle"
+RFV1,55450,"Injury, other and unspecified, of foo..."
+RFV1,55500,"Injury, other and unspecified, of sho..."
+RFV1,55550,"Injury, other and unspecified, of arm"
+RFV1,55600,"Injury, other and unspecified, of elbow"
+RFV1,55650,"Injury, other and unspecified, of wrist"
+RFV1,55700,"Injury, other and unspecified, of han..."
+RFV1,55750,"Injury, multiple or unspecified"
+RFV1,56000,Foreign body in eye
+RFV1,56050,Foreign body in nose
+RFV1,56100,Foreign body in skin
+RFV1,56150,Foreign body in digestive tract
+RFV1,56160,Foreign body in respiratory tract
+RFV1,56200,Foreign body in other and unspecified...
+RFV1,57050,"Burn, all degrees, to head, neck, and..."
+RFV1,57100,"Burn, all degrees, to trunk area"
+RFV1,57150,"Burn, all degrees, to extremities"
+RFV1,57200,"Burn, all degrees, to site unspecified"
+RFV1,57500,"Sunburn, windburn"
+RFV1,57550,Insect bite
+RFV1,57600,"Animal, human bite"
+RFV1,58000,Late effects of an old injury
+RFV1,58050,"Motor vehicle accident, type of injur..."
+RFV1,58100,"Accident, NOS"
+RFV1,58150,"Violence, NOS"
+RFV1,58151,Child abuse or neglect
+RFV1,58152,Battered spouse
+RFV1,58153,Elder abuse
+RFV1,58154,Gunshot wound
+RFV1,58180,Intentional self-mutilation
+RFV1,58200,Suicide attempt
+RFV1,58201,"Overdose, intentional"
+RFV1,58300,Rape
+RFV1,58301,Sexual abuse
+RFV1,58350,Dead on arrival (DOA)
+RFV1,58360,Respiratory arrest
+RFV1,58370,Cardiac arrest
+RFV1,58380,Drowning
+RFV1,58390,Cardiopulmonary arrest
+RFV1,58400,Unconscious on arrival
+RFV1,58410,State of consciousness not specified
+RFV1,58420,Altered level of consciousness
+RFV1,59000,Accidental poisoning
+RFV1,59001,Food poisoning
+RFV1,59002,"Ingestion, inhalation, or exposure to..."
+RFV1,59050,Adverse effect of medication
+RFV1,59100,Adverse effect of drug abuse
+RFV1,59150,Adverse effect of alcohol
+RFV1,59160,Alcohol poisoning
+RFV1,59200,Adverse effects of environment
+RFV1,59210,Adverse effects of secondhand smoke
+RFV1,59220,Adverse effects of terrorism and biot...
+RFV1,59250,"Adverse effects, other and unspecified"
+RFV1,59300,Surgical Complications due to any imp...
+RFV1,59301,"Due to presence of any implant, inter..."
+RFV1,59302,Post-operative Medical Complications
+RFV1,59350,"Systemic inflammatory response syndrome (SIRS), unspecified"
+RFV1,59352,Severe sepsis
+RFV1,59354,Systemic inflammatory response syndrome due to noninfect process...
+RFV1,61000,For results of blood glucose tests
+RFV1,61050,For results of cholesterol and trigly...
+RFV1,61060,For results of test for human immunod...
+RFV1,61100,For other findings of blood tests
+RFV1,62000,For results of urine tests
+RFV1,63000,For cytology findings
+RFV1,64000,For radiological findings
+RFV1,65000,For results of EKG
+RFV1,66000,For results of skin tests
+RFV1,67000,For other and unspecified test results
+RFV1,71000,Physical examination required for sch...
+RFV1,71001,Physical examination required for emp...
+RFV1,71002,Executive physical examination
+RFV1,71003,Physical examination required for school
+RFV1,71004,Physical examination for extracurricu...
+RFV1,71200,Driver's license examination
+RFV1,71250,Insurance examination
+RFV1,71300,Disability examination
+RFV1,71310,Worker's Compensation examination
+RFV1,71350,Premarital examination
+RFV1,71351,Premarital blood test
+RFV1,71370,Direct admission to hospital
+RFV1,71400,Other reason for visit required by party
+RFV1,89900,"Problems, complaints, NEC"
+RFV1,89910,Patient unable to speak English
+RFV1,89930,Patient (or spokesperson) refused care
+RFV1,89970,Entry of 'none' or 'no complaint'
+RFV1,89980,Inadequate data base
+RFV1,89990,Illegible entry
+IMMEDR,1,Immediate
+IMMEDR,2,Emergent
+IMMEDR,3,Urgent
+IMMEDR,4,Semi-urgent
+IMMEDR,5,Nonurgent
+IMMEDR,7,Visit occurred in ESA that does not conduct nursing triage

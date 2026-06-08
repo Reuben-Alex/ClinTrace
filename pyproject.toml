@@ -1,0 +1,54 @@
+[project]
+name = "clinictrace"
+version = "0.1.0"
+description = "Clinical Triage Agent with Traceable Reasoning — powered by Google ADK + Arize Phoenix"
+requires-python = ">=3.11"
+license = {text = "Apache-2.0"}
+dependencies = [
+    "google-adk",
+    "arize-phoenix-otel",
+    "arize-phoenix-evals",
+    "arize-phoenix-client",
+    "openinference-instrumentation-google-adk",
+    "openinference-instrumentation-mcp",
+    "fastapi[standard]",
+    "uvicorn[standard]",
+    "jinja2",
+    "python-dotenv",
+    "mcp",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
+]
+verification = [
+    "pandas",
+    "scikit-learn",
+    "tqdm",
+    "pyreadr",
+    "pyreadstat",
+]
+gcp = [
+    "google-cloud-aiplatform[agent_engines]",
+    "google-cloud-bigquery",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: live API tests (requires credentials and network)",
+]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+exclude = [".venv", "agent_tmp*"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["clintrace_agent", "ui", "verification", "scripts"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

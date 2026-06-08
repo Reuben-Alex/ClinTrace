@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClinTrace — Triage Report</title>
+    <script>
+        (function () {
+            var t = localStorage.getItem("clinictrace-theme");
+            if (t === "dark" || t === "light") {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/app.js" defer></script>
+    <script src="/static/report.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div class="logo">
+                <div class="logo-mark">
+                    <svg class="logo-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                        <rect x="2" y="2" width="32" height="32" rx="8" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M8 18h20M18 8v20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M10 24c2-4 4-6 8-6s6 2 8 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                    </svg>
+                    <a href="/" class="logo-link">
+                        <h1>ClinTrace</h1>
+                    </a>
+                </div>
+                <span class="tagline">Triage Audit Report</span>
+            </div>
+            <button
+                type="button"
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="Toggle dark mode"
+            >
+                <svg class="icon-sun" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M10 2v2M10 16v2M2 10h2M16 10h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M15.5 11.5a6.5 6.5 0 01-8-8 6.5 6.5 0 108 8z" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </button>
+        </header>
+
+        <nav class="nav-tabs" aria-label="App sections">
+            <a href="/" class="nav-tab">Manual Intake</a>
+            <a href="/nhamcs" class="nav-tab{% if nhamcs_mode %} nav-tab-active{% endif %}">NHAMCS Test Lab</a>
+        </nav>
+
+        <main>
+            {% if nhamcs_mode %}
+            <section class="card yale-result-banner" aria-labelledby="nhamcs-result-heading">
+                <h2 class="section-title" id="nhamcs-result-heading">NHAMCS Ground Truth Comparison</h2>
+                <div class="yale-result-grid">
+                    <div class="yale-result-item">
+                        <span class="yale-result-label">Nurse immediacy (IMMEDR)</span>
+                        <span class="yale-result-value">Level {{ ground_truth_immedr }}</span>
+                    </div>
+                    <div class="yale-result-item">
+                        <span class="yale-result-label">Agent predicted ESI</span>
+                        <span class="yale-result-value">
+                            {% if predicted_esi %}ESI {{ predicted_esi }}{% else %}Not extracted{% endif %}
+                        </span>
+                    </div>
+                    <div class="yale-result-item yale-result-item-wide">
+                        <span class="yale-result-label">Match (1:1 vs immediacy)</span>
+                        <span class="yale-result-value {% if esi_match %}esi-match-ok{% else %}esi-match-miss{% endif %}">
+                            {% if predicted_esi %}
+                                {% if esi_match %}Exact match{% else %}Differs from nurse immediacy{% endif %}
+                            {% else %}—{% endif %}
+                        </span>
+                    </div>
+                </div>
+                {% if diagnosis_codes %}
+                <p class="yale-panel-note">
+                    Final ICD-10 (post-hoc eval only, not shown to agent):
+                    {{ diagnosis_codes | join(', ') }}
+                </p>
+                {% endif %}
+            </section>
+            {% endif %}
+
+            {% if actions %}
+            <section class="card action-section" aria-labelledby="mission-heading">
+                <h2 class="section-title" id="mission-heading">Triage mission</h2>
+                <ol class="mission-steps">
+                    {% for step in actions.mission.steps %}
+                    <li class="mission-step mission-step-{{ step.status }}">
+                        <span class="mission-step-label">{{ step.label }}</span>
+                    </li>
+                    {% endfor %}
+                </ol>
+            </section>
+
+            <section class="card action-section" aria-labelledby="actions-heading">
+                <h2 class="section-title" id="actions-heading">Recommended actions</h2>
+
+                {% if actions.alerts %}
+                <div class="action-alert-grid">
+                    {% for alert in actions.alerts %}
+                    <div class="action-alert action-alert-{{ alert.urgency | default('urgent') }}">
+                        <span class="action-alert-type">Red flag</span>
+                        <strong>{{ alert.condition | replace('_', ' ') | title }}</strong>
+                        {% if alert.activate %}
+                        <span class="action-alert-activate">Activate: {{ alert.activate | replace('_', ' ') }}</span>
+                        {% endif %}
+                        {% if alert.evidence %}
+                        <ul class="action-alert-evidence">
+                            {% for item in alert.evidence %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="action-cards">
+                    <div class="action-card">
+                        <span class="action-card-label">Routing order</span>
+                        <p class="action-card-value">
+                            {{ actions.routing_order.destination | default('Pending') | replace('_', ' ') }}
+                        </p>
+                        <p class="action-card-meta">
+                            Priority: {{ actions.routing_order.priority | default('—') | replace('_', ' ') }}
+                            {% if actions.routing_order.estimated_time_to_provider %}
+                            · ETA: {{ actions.routing_order.estimated_time_to_provider }}
+                            {% endif %}
+                        </p>
+                        {% if actions.routing_order.consultations %}
+                        <p class="action-card-meta">
+                            Consults: {{ actions.routing_order.consultations | join(', ') }}
+                        </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="action-card{% if actions.esi.calibrated %} action-card-calibrated{% endif %}">
+                        <span class="action-card-label">ESI assessment</span>
+                        <p class="action-card-value">
+                            {% if actions.esi.level %}Level {{ actions.esi.level }}{% else %}—{% endif %}
+                            {% if actions.esi.calibrated %}
+                            <span class="esi-calibrated-badge">Phoenix calibrated</span>
+                            {% endif %}
+                        </p>
+                        {% if actions.esi.calibrated and actions.esi.model_esi and actions.esi.model_esi != actions.esi.level %}
+                        <p class="action-card-meta">
+                            Model scored ESI {{ actions.esi.model_esi }}; nurse history corrected to ESI {{ actions.esi.level }}.
+                        </p>
+                        {% endif %}
+                        <p class="action-card-meta">
+                            Confidence {{ "%.0f" | format((actions.esi.confidence | default(0)) * 100) }}%
+                            → adjusted {{ "%.0f" | format((actions.esi.adjusted_confidence | default(0)) * 100) }}%
+                        </p>
+                    </div>
+
+                    <div class="action-card{% if actions.human_review.recommend %} action-card-warn{% endif %}">
+                        <span class="action-card-label">Human review</span>
+                        <p class="action-card-value">
+                            {% if actions.human_review.recommend %}Recommended{% else %}Not required{% endif %}
+                        </p>
+                        {% if actions.human_review.reasons %}
+                        <ul class="action-card-reasons">
+                            {% for reason in actions.human_review.reasons %}
+                            <li>{{ reason }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+
+                    <div class="action-card">
+                        <span class="action-card-label">Phoenix history</span>
+                        <p class="action-card-value">
+                            {{ actions.phoenix_insight.similar_cases | default(0) }} similar
+                            · {{ actions.phoenix_insight.overrides | default(0) }} overrides
+                        </p>
+                        {% if actions.phoenix_insight.historical_insight %}
+                        <p class="action-card-meta">{{ actions.phoenix_insight.historical_insight }}</p>
+                        {% endif %}
+                        {% if actions.phoenix_insight.nurse_notes %}
+                        <ul class="action-card-notes">
+                            {% for note in actions.phoenix_insight.nurse_notes %}
+                            <li>{{ note }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+
+            {% if trace_id or actions %}
+            <section
+                class="card nurse-review-section"
+                id="nurseReviewSection"
+                aria-labelledby="review-heading"
+                data-trace-id="{{ trace_id }}"
+                data-agent-esi="{{ actions.esi.model_esi | default(actions.esi.level) | default(agent_esi) | default('') }}"
+                data-patient-input="{{ patient_input[:500] | e }}"
+                data-chief-complaint="{{ actions.chief_complaint | default('') | e }}"
+            >
+                <h2 class="section-title" id="review-heading">Nurse oversight</h2>
+                <p class="nurse-review-intro">
+                    Approve the agent decision or override the ESI level.
+                    Your choice is logged to Phoenix and feeds future triage runs.
+                </p>
+                <div class="nurse-review-controls">
+                    <button type="button" class="btn btn-primary" id="approveBtn">
+                        Approve agent decision
+                    </button>
+                    <div class="nurse-override-row">
+                        <label for="nurseEsiSelect">Override ESI</label>
+                        <select id="nurseEsiSelect" aria-label="Nurse ESI override">
+                            <option value="">Select level…</option>
+                            {% for level in range(1, 6) %}
+                            <option value="{{ level }}">ESI {{ level }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="button" class="btn btn-secondary" id="overrideBtn">
+                            Submit override
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group nurse-note-group">
+                    <label for="nurseNoteInput">Clinical note (optional)</label>
+                    <textarea
+                        id="nurseNoteInput"
+                        name="nurse_note"
+                        rows="2"
+                        maxlength="1000"
+                        placeholder="Reason for override, additional context, or approval notes — logged to Phoenix for future similar cases."
+                        aria-describedby="nurseNoteHelp"
+                    ></textarea>
+                    <p class="form-hint" id="nurseNoteHelp">
+                        Free-text annotations help the agent on future triage of similar presentations.
+                    </p>
+                </div>
+                <p class="nurse-review-status" id="nurseReviewStatus" hidden role="status"></p>
+            </section>
+            {% endif %}
+
+            <section class="card quality-card" aria-labelledby="quality-heading">
+                <h2 class="visually-hidden" id="quality-heading">Quality assessment</h2>
+                <div
+                    class="eval-banner eval-{{ eval_result.quality_label | replace(' ', '-') | replace('_', '-') }}"
+                    role="status"
+                >
+                    <div class="eval-score">
+                        <span class="eval-label">Quality Assessment</span>
+                        <span class="eval-value">{{ eval_result.quality_label | replace('_', ' ') | title }}</span>
+                    </div>
+                    <div class="eval-detail">
+                        {% if eval_result.quality_score is not none %}
+                        Score: {{ "%.0f" | format(eval_result.quality_score * 100) }}%
+                        {% if eval_result.explanation %}
+                         &mdash; {{ eval_result.explanation }}
+                        {% endif %}
+                        {% elif eval_result.explanation %}
+                        {{ eval_result.explanation }}
+                        {% endif %}
+                    </div>
+
+                    {% if agent_reasoning.has_content %}
+                    <div class="eval-reasoning">
+                        <h3 class="eval-reasoning-title">Why the agent made this call</h3>
+                        {% if agent_reasoning.summary %}
+                        <p class="eval-reasoning-summary">{{ agent_reasoning.summary }}</p>
+                        {% endif %}
+                        {% if agent_reasoning.bullets %}
+                        <dl class="eval-reasoning-facts">
+                            {% for label, text in agent_reasoning.bullets %}
+                            <dt>{{ label }}</dt>
+                            <dd>{{ text }}</dd>
+                            {% endfor %}
+                        </dl>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            <section class="card report-section" aria-labelledby="report-heading">
+                <h2 class="section-title" id="report-heading">Triage audit report</h2>
+
+                <div class="report-content">
+                    <pre class="audit-report" aria-label="Audit report">{{ audit_report }}</pre>
+                </div>
+
+                <div class="trace-link">
+                    {% if phoenix_url and phoenix_url != '#' %}
+                    <a href="{{ phoenix_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-trace">
+                        View This Trace in Phoenix
+                    </a>
+                    {% else %}
+                    <p class="trace-note trace-note-warn">
+                        Phoenix trace link unavailable — the run may still be indexing.
+                        Check the <strong>clinictrace</strong> project in Phoenix in a minute.
+                    </p>
+                    {% endif %}
+                    <p class="trace-note">
+                        Opens the exact trace for this triage &mdash; every reasoning
+                        step (symptom parsing, severity scoring, red-flag detection,
+                        routing, feedback) visible as spans in Arize Phoenix.
+                    </p>
+                </div>
+            </section>
+
+            <section class="card input-section" aria-labelledby="input-heading">
+                <h3 id="input-heading">Patient presentation sent to agent</h3>
+                <div class="patient-input-display">
+                    {{ patient_input }}
+                </div>
+            </section>
+
+            <div class="actions">
+                <a href="{{ back_url | default('/') }}" class="btn btn-primary">{{ back_label | default('New Triage') }}</a>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>
+                ClinTrace &mdash; Every decision traced to
+                <a href="https://app.phoenix.arize.com" target="_blank" rel="noopener noreferrer">Arize Phoenix</a>.
+                Built with Google ADK + Gemini.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

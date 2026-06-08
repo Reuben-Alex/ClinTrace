@@ -1,0 +1,20 @@
+{
+  "name": "clinictrace-phoenix-mcp-http",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Remote Streamable HTTP wrapper for @arizeai/phoenix-mcp (Cloud Run)",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@arizeai/phoenix-mcp": "4.0.13",
+    "@modelcontextprotocol/sdk": "1.27.1",
+    "cors": "^2.8.5",
+    "express": "^5.2.1"
+  }
+}

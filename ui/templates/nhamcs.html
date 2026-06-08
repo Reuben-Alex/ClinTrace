@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClinTrace — NHAMCS Test Lab</title>
+    <script>
+        (function () {
+            var t = localStorage.getItem("clinictrace-theme");
+            if (t === "dark" || t === "light") {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="/static/styles.css?v=20260601d">
+    <script src="/static/app.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div class="logo">
+                <div class="logo-mark">
+                    <svg class="logo-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                        <rect x="2" y="2" width="32" height="32" rx="8" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M8 18h20M18 8v20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M10 24c2-4 4-6 8-6s6 2 8 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                    </svg>
+                    <a href="/" class="logo-link"><h1>ClinTrace</h1></a>
+                </div>
+                <span class="tagline">NHAMCS Test Lab — real U.S. ED visits</span>
+            </div>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="icon-sun" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M10 2v2M10 16v2M2 10h2M16 10h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M15.5 11.5a6.5 6.5 0 01-8-8 6.5 6.5 0 108 8z" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </button>
+        </header>
+
+        <nav class="nav-tabs" aria-label="App sections">
+            <a href="/" class="nav-tab">Manual Intake</a>
+            <a href="/nhamcs" class="nav-tab nav-tab-active">NHAMCS Test Lab</a>
+        </nav>
+
+        <main>
+            <section class="card nhamcs-lab" aria-labelledby="nhamcs-heading">
+                <header class="nhamcs-lab-header">
+                    <div class="nhamcs-lab-title-row">
+                        <h2 class="nhamcs-lab-title" id="nhamcs-heading">NHAMCS cases</h2>
+                        <span class="lab-source-badge lab-source-badge--bq" id="dataSourceBadge">…</span>
+                    </div>
+                    <p class="lab-intro">
+                        Random visit from cleaned CDC data. The agent receives
+                        complaint and vitals only — diagnoses stay hidden until
+                        after triage.
+                    </p>
+                </header>
+
+                <div class="lab-toolbar">
+                    <div class="lab-toolbar-filter">
+                        <span class="lab-toolbar-label" id="immedrFilterLabel">Nurse immediacy</span>
+                        <div class="immedr-filter" role="radiogroup" aria-labelledby="immedrFilterLabel">
+                            <button type="button" class="immedr-chip is-active" data-value="">Any</button>
+                            <button type="button" class="immedr-chip" data-value="1" data-level="1">1</button>
+                            <button type="button" class="immedr-chip" data-value="2" data-level="2">2</button>
+                            <button type="button" class="immedr-chip" data-value="3" data-level="3">3</button>
+                            <button type="button" class="immedr-chip" data-value="4" data-level="4">4</button>
+                            <button type="button" class="immedr-chip" data-value="5" data-level="5">5</button>
+                        </div>
+                        <select id="immedrSelect" class="lab-select-sr" aria-hidden="true" tabindex="-1">
+                            <option value="">Any immediacy</option>
+                            <option value="1">1 — Immediate</option>
+                            <option value="2">2 — Emergent</option>
+                            <option value="3">3 — Urgent</option>
+                            <option value="4">4 — Semi-urgent</option>
+                            <option value="5">5 — Nonurgent</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="loadNhamcsBtn">
+                        Load case
+                    </button>
+                </div>
+
+                <div id="nhamcsEmpty" class="lab-empty">
+                    <span class="lab-empty-title">No case loaded</span>
+                    <p>Pick an immediacy level (optional), then load a case.</p>
+                </div>
+
+                <div id="nhamcsLoading" class="lab-status" aria-live="polite">
+                    <span class="lab-spinner" aria-hidden="true"></span>
+                    <span>Loading case…</span>
+                </div>
+
+                <div id="nhamcsPreview" class="lab-case">
+                    <div class="lab-case-header" id="caseBanner">
+                        <span class="lab-case-level" id="caseLevel" aria-hidden="true"></span>
+                        <div class="lab-case-meta">
+                            <p class="lab-case-label" id="gtImmedrBadge"></p>
+                            <p class="lab-case-id" id="recordBadge"></p>
+                        </div>
+                    </div>
+
+                    <div class="lab-panels" id="labPanels">
+                        <article class="lab-panel lab-panel-primary">
+                            <header class="lab-panel-head">
+                                <h3 class="lab-panel-title">Presentation</h3>
+                                <span class="lab-panel-tag">Agent input</span>
+                            </header>
+                            <div class="lab-facts" id="presentationFacts"></div>
+                        </article>
+                        <aside class="lab-panel lab-panel-diag" id="diagPanel" hidden>
+                            <header class="lab-panel-head">
+                                <h3 class="lab-panel-title">Chart diagnoses</h3>
+                                <span class="lab-panel-tag lab-panel-tag-muted">Eval only</span>
+                            </header>
+                            <ul class="lab-diag-chips" id="diagnosisList"></ul>
+                        </aside>
+                    </div>
+
+                    <form action="/nhamcs/triage" method="post" id="nhamcsTriageForm" class="lab-triage-form">
+                        <input type="hidden" name="agent_input" id="agentInput">
+                        <input type="hidden" name="ground_truth_immedr" id="groundTruthImmedr">
+                        <input type="hidden" name="record_id" id="recordId">
+                        <input type="hidden" name="chief_complaint" id="chiefComplaintInput">
+                        <input type="hidden" name="diagnosis_codes" id="diagnosisCodesInput">
+                        <button type="submit" class="btn btn-primary btn-lg" id="runTriageBtn">
+                            <span class="btn-text">Run triage</span>
+                            <span class="btn-loading">Running triage…</span>
+                        </button>
+                        <p id="triageProgress" class="lab-triage-progress" role="status">
+                            5 agents · usually 25–45 seconds. Case stays visible
+                            while the pipeline runs.
+                        </p>
+                    </form>
+                </div>
+
+                <p id="nhamcsError" class="lab-error" role="alert" hidden></p>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>CDC NHAMCS · Research demo only</p>
+        </footer>
+    </div>
+
+    <script src="/static/nhamcs.js" defer></script>
+</body>
+</html>
