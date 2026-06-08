@@ -115,11 +115,11 @@ Domain instructions live in `clintrace_agent/skills/*/SKILL.md`. With **`INLINE_
 |-------|------------|
 | Orchestration | Google **ADK 2.x** `Workflow`, optional `JoinNode` |
 | Reasoning | **Gemini 3.5 Flash** on Vertex (`CLINICTRACE_VERTEX_LOCATION=global`) |
-| Agent runtime | **Vertex AI Agent Engine** (production) or local ADK runner |
-| Observability | **Arize Phoenix Cloud**, OpenInference (ADK + optional MCP) |
-| Feedback | Phoenix **REST** (`query_phoenix_feedback`) + optional **Phoenix MCP** |
+| Agent runtime | **Vertex AI Agent Engine**  or local ADK runner |
+| Observability | **Arize Phoenix Cloud**, OpenInference (ADK +  MCP) |
+| Feedback | Phoenix **REST** (`query_phoenix_feedback`) +  **Phoenix MCP** |
 | UI | **FastAPI** on **Cloud Run**, Jinja templates, nurse oversight API |
-| Validation | **NHAMCS** (CDC public-use ED data), optional **BigQuery** |
+| Validation | **NHAMCS** (CDC public-use ED data),  **BigQuery** |
 | Deploy | `make deploy-all` → Phoenix MCP + Agent Engine + UI |
 
 ---
