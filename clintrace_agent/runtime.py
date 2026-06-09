@@ -153,6 +153,7 @@ async def _run_triage_local(patient_input: str) -> TriageResult:
         trace_id=trace_id,
         actions=actions,
         detail_audit_report=detail_audit_report,
+        session_id=session.id,
     )
 
 
@@ -161,6 +162,8 @@ async def _run_triage_agent_engine(
     resource_name: str,
 ) -> TriageResult:
     """Run triage against a deployed Vertex AI Agent Engine."""
+    from datetime import datetime, timezone
+
     import vertexai
     from vertexai import agent_engines
 
@@ -184,31 +187,54 @@ async def _run_triage_agent_engine(
     remote_agent = agent_engines.get(resource_name)
     session = remote_agent.create_session(user_id="clinictrace_ui")
     session_id = session["id"]
+    run_started_at = datetime.now(timezone.utc)
 
     final_response = ""
-    for event in remote_agent.stream_query(
-        user_id="clinictrace_ui",
-        session_id=session_id,
-        message=patient_input,
-    ):
-        if isinstance(event, dict):
-            content = event.get("content", {})
-            parts = content.get("parts", [])
-            for part in parts:
-                if isinstance(part, dict) and part.get("text"):
-                    final_response = part["text"]
-                elif hasattr(part, "text"):
-                    final_response = part.text
+    with _tracer.start_as_current_span("clinictrace.triage") as span:
+        stamp_triage_root_span_start(
+            span,
+            patient_input=patient_input,
+            session_id=session_id,
+        )
+        with using_session(session_id):
+            for event in remote_agent.stream_query(
+                user_id="clinictrace_ui",
+                session_id=session_id,
+                message=patient_input,
+            ):
+                if isinstance(event, dict):
+                    content = event.get("content", {})
+                    parts = content.get("parts", [])
+                    for part in parts:
+                        if isinstance(part, dict) and part.get("text"):
+                            final_response = part["text"]
+                        elif hasattr(part, "text"):
+                            final_response = part.text
 
-    trace_id = resolve_trace_id(
-        session_id=session_id,
-        prefer_session=True,
-        session_retries=8,
-    )
+        stamp_triage_root_span_end(span, audit_report=final_response)
+
+        ui_trace_id = otel_trace_id_from_span_context()
+        agent_trace_id = resolve_trace_id(
+            session_id=session_id,
+            prefer_session=True,
+            session_retries=5,
+            run_started_at=run_started_at,
+        )
+        trace_id = ui_trace_id or agent_trace_id or ""
+        if (
+            ui_trace_id
+            and agent_trace_id
+            and ui_trace_id != agent_trace_id
+            and span.is_recording()
+        ):
+            span.set_attribute("clintrace.agent_trace_id", agent_trace_id)
+
     actions = build_triage_actions({}, audit_report=final_response)
 
     return TriageResult(
         audit_report=final_response,
         trace_id=trace_id,
         actions=actions,
+        session_id=session_id,
+        run_started_at=run_started_at.isoformat(),
     )

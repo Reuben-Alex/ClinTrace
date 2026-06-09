@@ -125,6 +125,7 @@ def log_ground_truth_annotation(
         score=score,
         explanation=explanation,
         metadata=metadata,
+        mirror_to_span=True,
     )
 
 
@@ -199,6 +200,53 @@ def _similarity_metadata_for_review(
     }
 
 
+def _nurse_review_quality_eval(
+    action: str,
+    *,
+    agent_esi: int | None,
+    nurse_esi: int | None,
+    note: str = "",
+) -> dict[str, Any]:
+    """Build triage_quality payload for nurse approve/override."""
+    if action == "approve":
+        label = "nurse_confirmed"
+        score = 1.0
+        explanation = (
+            f"Nurse approved agent ESI-{agent_esi}."
+            if agent_esi is not None
+            else "Nurse approved agent triage decision."
+        )
+    elif action == "under_triage":
+        label = "dangerous"
+        score = 0.0
+        explanation = (
+            f"Nurse override: agent ESI-{agent_esi}, "
+            f"nurse ESI-{nurse_esi} (under-triage correction)."
+        )
+    elif action == "over_triage":
+        label = "potential_risk"
+        score = 0.5
+        explanation = (
+            f"Nurse override: agent ESI-{agent_esi}, "
+            f"nurse ESI-{nurse_esi} (over-triage correction)."
+        )
+    else:
+        label = "potential_risk"
+        score = 0.5
+        explanation = note or f"Nurse action: {action}"
+
+    if note and action != "approve":
+        explanation += f" Reason: {note}"
+    elif note:
+        explanation += f" Note: {note}"
+
+    return {
+        "quality_label": label,
+        "quality_score": score,
+        "explanation": explanation,
+    }
+
+
 def log_nurse_review(
     trace_id: str,
     *,
@@ -209,7 +257,7 @@ def log_nurse_review(
     patient_input: str | None = None,
     chief_complaint: str | None = None,
 ) -> dict[str, Any] | None:
-    """Log nurse approve/override decision to Phoenix for the feedback loop."""
+    """Log nurse approve/override to Phoenix (ground_truth_eval + triage_quality)."""
     if action == "approve":
         label = "nurse_approved"
         score = 1.0
@@ -257,7 +305,7 @@ def log_nurse_review(
         _similarity_metadata_for_review(patient_input, chief_complaint)
     )
 
-    return _log_annotation(
+    inserted = _log_annotation(
         trace_id,
         name="ground_truth_eval",
         annotator_kind="HUMAN",
@@ -267,3 +315,22 @@ def log_nurse_review(
         metadata=metadata,
         mirror_to_span=True,
     )
+    if inserted is None:
+        return None
+
+    quality = _nurse_review_quality_eval(
+        action,
+        agent_esi=agent_esi,
+        nurse_esi=nurse_esi,
+        note=note,
+    )
+    _log_annotation(
+        trace_id,
+        name="triage_quality",
+        annotator_kind="HUMAN",
+        label=quality["quality_label"],
+        score=float(quality["quality_score"]),
+        explanation=quality["explanation"],
+        mirror_to_span=True,
+    )
+    return inserted

@@ -131,8 +131,9 @@ gcloud run deploy "${SERVICE}" \
   --memory=1Gi \
   --cpu=1 \
   --timeout=300 \
-  --min-instances=0 \
+  --min-instances=1 \
   --max-instances=3 \
+  --cpu-boost \
   --set-env-vars="${ENV_VARS}" \
   --set-secrets="PHOENIX_API_KEY=${SECRET_PHOENIX_API_KEY}:latest" \
   --quiet

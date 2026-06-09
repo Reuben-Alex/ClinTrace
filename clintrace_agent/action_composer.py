@@ -13,6 +13,7 @@ from clintrace_agent.report_extract import (
     extract_confidence_from_report,
     extract_destination_from_report,
     extract_esi_from_report,
+    extract_feedback_from_report,
     extract_priority_from_report,
 )
 from clintrace_agent.routing_fallback import complete_routing_from_state
@@ -77,6 +78,12 @@ def build_triage_actions(
     routing = complete_routing_from_state(state)
     feedback = parse_json_blob(state.get("feedback_analysis"))
 
+    if audit_report:
+        report_feedback = extract_feedback_from_report(audit_report)
+        for key, value in report_feedback.items():
+            if key not in feedback or feedback.get(key) in (None, 0, "", False, []):
+                feedback[key] = value
+
     esi = severity.get("esi_level")
     esi_conf = severity.get("confidence", 0.0)
     if audit_report:
@@ -86,12 +93,14 @@ def build_triage_actions(
             parsed_conf = extract_confidence_from_report(audit_report)
             if parsed_conf is not None:
                 esi_conf = parsed_conf
+    if feedback.get("model_esi") is not None:
+        esi = feedback.get("model_esi")
     adjusted = feedback.get("adjusted_confidence", esi_conf)
     display_esi = feedback.get("calibrated_esi") or esi
     esi_calibrated = bool(feedback.get("esi_calibration_applied"))
 
     recommend_review = bool(feedback.get("recommend_human_review", False))
-    if esi in (1, 2):
+    if display_esi in (1, 2):
         recommend_review = True
     try:
         if float(esi_conf) < 0.7:
@@ -100,8 +109,10 @@ def build_triage_actions(
         pass
 
     review_reasons: list[str] = []
-    if esi in (1, 2):
-        review_reasons.append(f"ESI level {esi} requires immediate attention")
+    if display_esi in (1, 2):
+        review_reasons.append(
+            f"ESI level {display_esi} requires immediate attention"
+        )
     try:
         if float(adjusted) < 0.7:
             review_reasons.append(

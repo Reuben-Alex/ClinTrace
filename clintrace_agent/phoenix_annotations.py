@@ -76,40 +76,60 @@ def fetch_trace_annotations(
     return [flatten_trace_annotation(a) for a in raw if isinstance(a, dict)]
 
 
+_ROOT_SPAN_FALLBACK_NAMES = (
+    ROOT_SPAN_NAME,
+    "phoenix.query_feedback",
+    "agent_run",
+    "invoke_agent",
+)
+
+
 def find_root_span_id(client: Any, trace_id: str) -> str | None:
-    """Find the clinictrace.triage root span id for a trace."""
+    """Find a root-ish span id for mirroring annotations in Phoenix UI."""
     normalized = normalize_trace_id(trace_id)
     if not normalized:
         return None
 
-    try:
-        spans = client.spans.get_spans(
-            project_identifier=PHOENIX_PROJECT,
-            name=ROOT_SPAN_NAME,
-            trace_ids=[normalized],
-            limit=1,
-        )
+    for span_name in _ROOT_SPAN_FALLBACK_NAMES:
+        try:
+            spans = client.spans.get_spans(
+                project_identifier=PHOENIX_PROJECT,
+                name=span_name,
+                trace_ids=[normalized],
+                limit=1,
+            )
+        except Exception:  # noqa: BLE001
+            spans = []
         if spans:
             ctx = spans[0].get("context") or {}
-            return ctx.get("span_id")
-    except Exception:  # noqa: BLE001
-        pass
+            span_id = ctx.get("span_id")
+            if span_id:
+                return span_id
 
     try:
         spans = client.spans.get_spans(
             project_identifier=PHOENIX_PROJECT,
-            name=ROOT_SPAN_NAME,
-            limit=80,
+            trace_ids=[normalized],
+            limit=20,
         )
     except Exception:  # noqa: BLE001
         return None
 
+    earliest: tuple[str | None, str | None] | None = None
     for span in spans:
+        if not isinstance(span, dict):
+            continue
         ctx = span.get("context") or {}
         tid = str(ctx.get("trace_id", "")).lower().replace("-", "")
-        if tid == normalized:
-            return ctx.get("span_id")
-    return None
+        if tid != normalized:
+            continue
+        span_id = ctx.get("span_id")
+        if not span_id:
+            continue
+        start = span.get("start_time") or ""
+        if earliest is None or str(start) < str(earliest[0]):
+            earliest = (start, span_id)
+    return earliest[1] if earliest else None
 
 
 def write_trace_annotation(

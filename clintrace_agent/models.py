@@ -12,3 +12,5 @@ class TriageResult:
     trace_id: str
     actions: dict[str, Any] = field(default_factory=dict)
     detail_audit_report: str | None = None
+    session_id: str = ""
+    run_started_at: str = ""

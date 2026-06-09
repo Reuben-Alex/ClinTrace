@@ -46,6 +46,16 @@ Build keywords in this order:
 - Scanning “recent traces” without complaint match (never calibrate from unrelated cases)
 - Prior override chief complaint differs (e.g. `chest pain` vs `alcohol-related problems`)
 - Nurse note describes a different workup (e.g. MRI for chest pain) on unrelated chief complaint
+- **Cross-protocol mismatch** — presentation families differ (MTS-style flows:
+  cardiovascular, trauma_injury, neurological, respiratory, toxicology, etc.)
+- **Pathway conflict** — nurse note implies ACS/STEMI, stroke, trauma team, sepsis,
+  etc. but the current case is a different protocol family
+- **`annotation_metadata` only** — may adjust confidence; do **not** apply ESI
+  calibration unless match is span-based (`attribute_chief_complaint` or
+  `keyword_overlap`)
+
+Fast path (`feedback_matching.py`) encodes these rules using Manchester Triage
+System–style presentation groups and common US ED activation pathway markers.
 
 ## ESI calibration output
 

@@ -116,6 +116,8 @@ class AgentEngineApp(AdkApp):
 
     def set_up(self) -> None:
         """Initialize the agent engine app with logging and telemetry."""
+        import clintrace_agent.instrumentation  # noqa: F401 — Phoenix OTel export
+
         setup_telemetry()
         os.environ.setdefault(
             "GOOGLE_CLOUD_AGENT_ENGINE_LOCATION",

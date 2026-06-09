@@ -87,6 +87,7 @@ def _count_overrides_from_annotations(
     *,
     trace_ids: list[str],
     keywords: list[str],
+    match_method: str | None = None,
 ) -> tuple[int, int]:
     """Count complaint-matched override annotations across similar trace ids."""
     override_traces: set[str] = set()
@@ -99,7 +100,9 @@ def _count_overrides_from_annotations(
             name == "ground_truth_eval"
             and label in _OVERRIDE_LABELS
             and tid
-            and annotation_matches_case(meta, keywords)
+            and annotation_matches_case(
+                meta, keywords, match_method=match_method
+            )
         ):
             override_traces.add(str(tid))
     return len(override_traces), len(trace_ids)
@@ -109,6 +112,7 @@ def _nurse_corrections_from_annotations(
     annotations: list[dict[str, Any]],
     *,
     keywords: list[str],
+    match_method: str | None = None,
 ) -> list[dict[str, Any]]:
     """Extract nurse ESI corrections for clinically similar cases only."""
     corrections: list[dict[str, Any]] = []
@@ -118,7 +122,7 @@ def _nurse_corrections_from_annotations(
         if name != "ground_truth_eval" or label not in _OVERRIDE_LABELS:
             continue
         meta = _annotation_metadata(ann.get("metadata") or {})
-        if not annotation_matches_case(meta, keywords):
+        if not annotation_matches_case(meta, keywords, match_method=match_method):
             continue
         nurse_esi = meta.get("nurse_esi")
         note = (meta.get("nurse_note") or meta.get("note") or "").strip()
@@ -152,6 +156,7 @@ def _nurse_notes_from_annotations(
     annotations: list[dict[str, Any]],
     *,
     keywords: list[str],
+    match_method: str | None = None,
 ) -> list[str]:
     """Collect nurse notes from complaint-matched override annotations."""
     notes: list[str] = []
@@ -160,7 +165,7 @@ def _nurse_notes_from_annotations(
         if ann.get("name") != "ground_truth_eval":
             continue
         meta = _annotation_metadata(ann.get("metadata") or {})
-        if not annotation_matches_case(meta, keywords):
+        if not annotation_matches_case(meta, keywords, match_method=match_method):
             continue
         note = (meta.get("nurse_note") or meta.get("note") or "").strip()
         if note and note not in seen:
@@ -316,13 +321,17 @@ def _trace_ids_from_annotation_metadata(
         if not tid:
             continue
         chief = meta.get("chief_complaint") or meta.get("chiefComplaint")
-        if chief and annotation_matches_case(meta, keywords):
+        if chief and annotation_matches_case(
+            meta, keywords, match_method="annotation_metadata"
+        ):
             matched.append(str(tid))
             continue
         ann_keywords = meta.get("symptom_keywords") or []
         if isinstance(ann_keywords, str):
             ann_keywords = [k.strip() for k in ann_keywords.split(",")]
-        if ann_keywords and annotation_matches_case(meta, keywords):
+        if ann_keywords and annotation_matches_case(
+            meta, keywords, match_method="annotation_metadata"
+        ):
             matched.append(str(tid))
 
     if matched:
@@ -432,6 +441,7 @@ def _query_phoenix_feedback_inner(
         corrections = _nurse_corrections_from_annotations(
             annotations,
             keywords=keywords,
+            match_method=match_method,
         )
         if corrections and not similar_ids:
             similar_ids = list(
@@ -460,11 +470,16 @@ def _query_phoenix_feedback_inner(
         annotations,
         trace_ids=similar_ids,
         keywords=keywords,
+        match_method=match_method,
     )
     if total_similar == 0 and similar_ids:
         total_similar = len(similar_ids)
     nurse_esi = _consensus_nurse_esi(corrections)
-    nurse_notes = _nurse_notes_from_annotations(annotations, keywords=keywords)
+    nurse_notes = _nurse_notes_from_annotations(
+        annotations,
+        keywords=keywords,
+        match_method=match_method,
+    )
 
     calibrated_esi: int | None = None
     esi_calibration_applied = False

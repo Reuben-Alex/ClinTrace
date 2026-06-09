@@ -201,6 +201,8 @@
                 id="nurseReviewSection"
                 aria-labelledby="review-heading"
                 data-trace-id="{{ trace_id }}"
+                data-session-id="{{ session_id | e }}"
+                data-run-started-at="{{ run_started_at | e }}"
                 data-agent-esi="{{ actions.esi.model_esi | default(actions.esi.level) | default(agent_esi) | default('') }}"
                 data-patient-input="{{ patient_input[:500] | e }}"
                 data-chief-complaint="{{ actions.chief_complaint | default('') | e }}"
@@ -297,11 +299,17 @@
                     <a href="{{ phoenix_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-trace">
                         View This Trace in Phoenix
                     </a>
+                    {% if trace_id %}
+                    <p class="trace-note trace-id-note">Trace ID: <code>{{ trace_id }}</code></p>
+                    {% endif %}
                     {% else %}
                     <p class="trace-note trace-note-warn">
                         Phoenix trace link unavailable — the run may still be indexing.
                         Check the <strong>clinictrace</strong> project in Phoenix in a minute.
                     </p>
+                    {% if trace_id %}
+                    <p class="trace-note trace-id-note">Trace ID: <code>{{ trace_id }}</code></p>
+                    {% endif %}
                     {% endif %}
                     <p class="trace-note">
                         Opens the exact trace for this triage &mdash; every reasoning

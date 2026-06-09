@@ -7,6 +7,8 @@ Provides a clean medical-professional interface for:
 - Links to Phoenix trace dashboard
 """
 
+from __future__ import annotations
+
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -18,64 +20,49 @@ from fastapi.templating import Jinja2Templates
 
 load_dotenv()
 
-# Instrumentation must load before agent imports
-import clintrace_agent.instrumentation  # noqa: E402, F401
-
-from clintrace_agent.config import (  # noqa: E402
-    UI_INTAKE_LLM_QUALITY_EVAL,
-    UI_SKIP_QUALITY_EVAL,
-)
-from clintrace_agent.evals.triage_eval import evaluate_triage  # noqa: E402
-from clintrace_agent.phoenix_feedback import (  # noqa: E402
-    log_ground_truth_annotation,
-    log_nurse_review,
-    log_quality_annotation,
-)
-from clintrace_agent.phoenix_links import build_phoenix_trace_url  # noqa: E402
-from clintrace_agent.report_extract import extract_esi_from_report  # noqa: E402
-from clintrace_agent.runtime import run_triage  # noqa: E402
-from ui.nhamcs_lab import data_source_label, sample_nhamcs_case  # noqa: E402
-from ui.eval_display import (  # noqa: E402
-    clinical_quality_eval,
-    extract_agent_reasoning,
-    nhamcs_accuracy_eval,
-)
-from ui.nhamcs_safety import agent_input_for_triage  # noqa: E402
-
 UI_DIR = Path(__file__).parent
 app = FastAPI(title="ClinTrace", description="Clinical Triage with Traceable AI")
+app.mount("/static", StaticFiles(directory=UI_DIR / "static"), name="static")
+templates = Jinja2Templates(directory=UI_DIR / "templates")
+
+
+def _ensure_agent_loaded() -> None:
+    """Load Phoenix instrumentation and agent modules on first triage request."""
+    import clintrace_agent.instrumentation  # noqa: F401
 
 
 @app.on_event("startup")
 def warmup_nhamcs_data() -> None:
-    """Pre-warm BigQuery so first case load is sub-second."""
+    """Pre-warm BigQuery so first NHAMCS case load is sub-second."""
     try:
         from ui.nhamcs_lab import _bq_enabled  # noqa: PLC2701
 
         _bq_enabled()
     except Exception:
         pass
-app.mount("/static", StaticFiles(directory=UI_DIR / "static"), name="static")
-templates = Jinja2Templates(directory=UI_DIR / "templates")
 
 
 def _extract_esi_from_report(report: str) -> int | None:
-    """Extract predicted ESI from audit report text."""
+    from clintrace_agent.report_extract import extract_esi_from_report
+
     return extract_esi_from_report(report)
 
 
 def _phoenix_trace_url(trace_id: str) -> str:
-    """Build Phoenix deep link (project + trace Global IDs)."""
+    from clintrace_agent.phoenix_links import build_phoenix_trace_url
+
     return build_phoenix_trace_url(trace_id)
 
 
 def _report_for_quality(result) -> str:
-    """Final audit report shown to the user (includes Phoenix calibration)."""
     return result.audit_report
 
 
 async def _intake_quality_eval(patient_input: str, result) -> dict:
-    """Quality banner for manual intake — LLM judge when enabled."""
+    from clintrace_agent.config import UI_INTAKE_LLM_QUALITY_EVAL
+    from clintrace_agent.evals.triage_eval import evaluate_triage
+    from ui.eval_display import clinical_quality_eval
+
     if UI_INTAKE_LLM_QUALITY_EVAL:
         return await evaluate_triage(patient_input, result.audit_report)
     return clinical_quality_eval(
@@ -84,11 +71,11 @@ async def _intake_quality_eval(patient_input: str, result) -> dict:
     )
 
 
-async def _quality_eval(
-    patient_input: str,
-    result,
-) -> dict:
-    """Quality banner for NHAMCS — fast rules when UI_SKIP_QUALITY_EVAL."""
+async def _quality_eval(patient_input: str, result) -> dict:
+    from clintrace_agent.config import UI_SKIP_QUALITY_EVAL
+    from clintrace_agent.evals.triage_eval import evaluate_triage
+    from ui.eval_display import clinical_quality_eval
+
     if UI_SKIP_QUALITY_EVAL:
         return clinical_quality_eval(
             audit_report=result.audit_report,
@@ -107,9 +94,13 @@ def _report_template_context(
     actions: dict | None = None,
     reasoning_report: str | None = None,
     nhamcs_mode: bool = False,
+    session_id: str = "",
+    run_started_at: str = "",
     **extra,
 ) -> dict:
-    """Shared context for report.html."""
+    from clintrace_agent.report_extract import extract_esi_from_report
+    from ui.eval_display import extract_agent_reasoning
+
     reasoning_source = reasoning_report or audit_report
     return {
         "request": request,
@@ -122,6 +113,8 @@ def _report_template_context(
         "agent_esi": extract_esi_from_report(audit_report),
         "actions": actions or {},
         "nhamcs_mode": nhamcs_mode,
+        "session_id": session_id,
+        "run_started_at": run_started_at,
         **extra,
     }
 
@@ -147,6 +140,8 @@ async def index(request: Request):
 @app.get("/nhamcs", response_class=HTMLResponse)
 async def nhamcs_lab(request: Request):
     """NHAMCS test lab — real ED cases with nurse immediacy ground truth."""
+    from ui.nhamcs_lab import data_source_label
+
     return templates.TemplateResponse(
         request,
         "nhamcs.html",
@@ -157,12 +152,16 @@ async def nhamcs_lab(request: Request):
 @app.get("/api/nhamcs/status")
 async def nhamcs_status():
     """Report which NHAMCS backend is active (BigQuery vs local Stata)."""
+    from ui.nhamcs_lab import data_source_label
+
     return {"data_source": data_source_label()}
 
 
 @app.get("/api/nhamcs/sample")
 async def nhamcs_sample(immedr: int | None = None):
     """Return a random NHAMCS case (complaint + vitals; no diagnoses)."""
+    from ui.nhamcs_lab import sample_nhamcs_case
+
     try:
         case = sample_nhamcs_case(immedr_level=immedr)
         return JSONResponse(case.to_dict())
@@ -182,6 +181,11 @@ def _log_nhamcs_phoenix(
     eval_result: dict,
 ) -> None:
     """Background Phoenix annotations (do not block HTTP response)."""
+    from clintrace_agent.phoenix_feedback import (
+        log_ground_truth_annotation,
+        log_quality_annotation,
+    )
+
     if not trace_id:
         return
     if eval_result.get("quality_label") != "not_evaluated":
@@ -213,6 +217,12 @@ async def nhamcs_triage(
     diagnosis_codes: str = Form(""),
 ):
     """Run triage on an NHAMCS case; compare to nurse immediacy after."""
+    from clintrace_agent.config import UI_SKIP_QUALITY_EVAL
+    from clintrace_agent.runtime import run_triage
+    from ui.eval_display import nhamcs_accuracy_eval
+    from ui.nhamcs_safety import agent_input_for_triage
+
+    _ensure_agent_loaded()
     triage_input = agent_input_for_triage(agent_input, diagnosis_codes)
     result = await run_triage(triage_input)
 
@@ -254,6 +264,8 @@ async def nhamcs_triage(
             actions=result.actions,
             reasoning_report=_report_for_quality(result),
             nhamcs_mode=True,
+            session_id=result.session_id,
+            run_started_at=result.run_started_at,
             ground_truth_immedr=ground_truth_immedr,
             ground_truth_esi=ground_truth_immedr,
             predicted_esi=predicted_esi,
@@ -269,6 +281,10 @@ async def nhamcs_triage(
 @app.post("/triage", response_class=HTMLResponse)
 async def triage(request: Request, patient_input: str = Form(...)):
     """Run the triage pipeline and display the audit report."""
+    from clintrace_agent.phoenix_feedback import log_quality_annotation
+    from clintrace_agent.runtime import run_triage
+
+    _ensure_agent_loaded()
     result = await run_triage(patient_input)
 
     eval_result = await _intake_quality_eval(patient_input, result)
@@ -287,15 +303,51 @@ async def triage(request: Request, patient_input: str = Form(...)):
             actions=result.actions,
             reasoning_report=_report_for_quality(result),
             nhamcs_mode=False,
+            session_id=result.session_id,
+            run_started_at=result.run_started_at,
             back_url="/",
             back_label="New Triage",
         ),
     )
 
 
+@app.get("/api/triage/resolve-trace")
+async def resolve_triage_trace(
+    session_id: str = "",
+    since: str = "",
+):
+    """Poll Phoenix for the agent triage OTel trace id (post-indexing)."""
+    from datetime import datetime
+
+    from clintrace_agent.phoenix_annotations import normalize_trace_id
+    from clintrace_agent.phoenix_trace_lookup import resolve_trace_id
+
+    since_dt = None
+    if since:
+        text = since.strip()
+        if text.endswith("Z"):
+            text = f"{text[:-1]}+00:00"
+        try:
+            since_dt = datetime.fromisoformat(text)
+        except ValueError:
+            pass
+
+    trace_id = resolve_trace_id(
+        session_id=session_id or None,
+        prefer_session=True,
+        session_retries=8,
+        run_started_at=since_dt,
+    )
+    normalized = normalize_trace_id(trace_id) if trace_id else None
+    return {"trace_id": normalized, "ready": bool(normalized)}
+
+
 @app.post("/api/triage/review")
 async def triage_nurse_review(body: NurseReviewRequest):
     """Record nurse approve/override in Phoenix (human-in-the-loop)."""
+    from clintrace_agent.phoenix_annotations import normalize_trace_id
+    from clintrace_agent.phoenix_feedback import log_nurse_review
+
     allowed = {"approve", "under_triage", "over_triage"}
     if body.action not in allowed:
         return JSONResponse(
@@ -307,7 +359,6 @@ async def triage_nurse_review(body: NurseReviewRequest):
             {"error": "nurse_esi required for overrides"},
             status_code=400,
         )
-    from clintrace_agent.phoenix_annotations import normalize_trace_id
 
     if not normalize_trace_id(body.trace_id):
         return JSONResponse(

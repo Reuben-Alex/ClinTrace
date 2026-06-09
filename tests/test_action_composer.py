@@ -68,3 +68,39 @@ def test_build_triage_actions_falls_back_to_audit_report():
     assert actions["esi"]["level"] == 2
     assert actions["esi"]["confidence"] == 0.95
     assert actions["routing_order"]["destination"] == "CARDIAC_CATH"
+
+
+def test_build_triage_actions_parses_phoenix_calibration_from_report():
+    report = (
+        "CLINTRACE TRIAGE AUDIT REPORT\n"
+        "SEVERITY ASSESSMENT\n"
+        "• ESI Level: 1 (Confidence: 98%)\n"
+        "• Phoenix calibration: nurse corrected similar case to ESI "
+        "1 (model scored ESI 2)\n"
+        "DECISION CONFIDENCE & AUDIT TRAIL\n"
+        "• ESI Confidence: 98%\n"
+        "• Adjusted Confidence: 78%\n"
+        "• Historical Insight: Found 2 similar case(s) via "
+        "keyword_overlap_low_n (chest pain); 2 complaint-matched "
+        "nurse overrides. Applying nurse-corrected ESI 1 from history. "
+        "Prior nurse note(s): cath lab | STEMI pathway\n"
+        "• Adjustment Reason: High override rate (100%) on 2 similar "
+        "cases. Reducing confidence significantly.\n"
+        "• Similar Cases / Overrides: 2 / 2\n"
+        "• Recommendation: HUMAN REVIEW RECOMMENDED\n"
+        "ROUTING DECISION\n"
+        "• Destination: CARDIAC_CATH\n"
+        "• Priority: immediate\n"
+    )
+    actions = build_triage_actions({}, audit_report=report)
+
+    assert actions["esi"]["level"] == 1
+    assert actions["esi"]["model_esi"] == 2
+    assert actions["esi"]["calibrated"] is True
+    assert actions["esi"]["adjusted_confidence"] == 0.78
+    assert actions["phoenix_insight"]["similar_cases"] == 2
+    assert actions["phoenix_insight"]["overrides"] == 2
+    assert actions["phoenix_insight"]["nurse_notes"] == [
+        "cath lab",
+        "STEMI pathway",
+    ]

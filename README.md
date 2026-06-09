@@ -85,13 +85,38 @@ Alternate graph (set `MERGE_TRIAGE_LLM_STEPS=false`): parallel `severity_scorer`
 flowchart LR
   UI[Nurse UI] -->|POST /api/triage/review| PX[Phoenix annotations]
   AE[Agent Engine] -->|query_phoenix_feedback| PX
-  PX -->|complaint-matched nurse_esi| AE
+  PX -->|protocol-matched nurse_esi| AE
   AE -->|calibrated ESI in audit| UI
 ```
 
-1. **Write** — Nurse override → `ground_truth_eval` annotation (`under_triage` / `over_triage`) with `nurse_esi`, `agent_esi`, `chief_complaint`, `nurse_note`.
-2. **Match** — Next run builds keywords from parsed symptoms; overrides apply only when chief complaint / clinical phrases overlap (e.g. `chest pain` matches prior chest-pain overrides, not unrelated cases).
-3. **Apply** — `feedback_agent` sets `calibrated_esi`, `esi_calibration_applied`, and updated confidence in `feedback_analysis`; audit report reflects the correction.
+1. **Write** — Nurse override → `ground_truth_eval` annotation (`under_triage` / `over_triage`) with `nurse_esi`, `agent_esi`, short `chief_complaint`, `symptom_keywords`, and optional `nurse_note`.
+2. **Match** — `query_phoenix_feedback` (Phoenix REST) finds similar traces, then `feedback_matching.py` decides whether each override applies. With **`FAST_TRIAGE=true`** (production default), this is **deterministic Python** — not an extra LLM call.
+3. **Apply** — When a complaint-matched override exists and match quality is high enough, `feedback_agent` sets `calibrated_esi`, `esi_calibration_applied`, and adjusted confidence; the audit report and UI action cards reflect the correction.
+
+#### Protocol-aligned similarity matching
+
+Overrides are **not** matched diagnosis-by-diagnosis. They use **ED triage protocol buckets** inspired by the **Manchester Triage System (MTS)** presenting-complaint flows, plus common **US ED activation pathways** (ACS/STEMI, stroke, trauma, sepsis, etc.):
+
+| Protocol family | Examples |
+|-----------------|----------|
+| `cardiovascular` | Chest pain, ACS, palpitations |
+| `trauma_injury` | Head/neck injury, laceration, MVC |
+| `neurological` | Stroke, seizure, headache, syncope |
+| `respiratory` | Dyspnea, asthma, cough |
+| `toxicology` | Alcohol, overdose, intoxication |
+| … | GI, GU, mental health, infectious, allergic, etc. |
+
+**Three gates** must pass before an override influences a run:
+
+| Gate | Rule |
+|------|------|
+| **Complaint similarity** | Keyword / chief-complaint overlap (stricter **0.55** threshold for weak `annotation_metadata` scans; **0.34** for span-based matches) |
+| **Protocol family** | Current case and override must share an MTS-style family (blocks e.g. cardiovascular STEMI history on a trauma head-injury case) |
+| **Pathway markers** | Nurse notes implying ACS/cath lab, code stroke, trauma team, sepsis bundle, etc. must align with the current case’s protocol family |
+
+**ESI calibration** is allowed only from **high-trust** span matches (`attribute_chief_complaint` or `keyword_overlap`). Metadata-only matches may affect confidence counts but **do not change ESI**.
+
+Implementation: `clintrace_agent/feedback_matching.py` + `clintrace_agent/tools/phoenix_history.py`. The `phoenix-similarity-matching` skill documents the same rules for the optional slow LLM feedback path (`FAST_TRIAGE=false`).
 
 ### ADK Skills
 
@@ -104,8 +129,8 @@ Domain instructions live in `clintrace_agent/skills/*/SKILL.md`. With **`INLINE_
 | `red-flag-screening` | Red-flag detection |
 | `ed-specialist-routing` | Specialist router |
 | `triage-audit-report` | Audit reporter (non-merged path) |
-| `phoenix-feedback-loop` | LLM feedback path |
-| `phoenix-similarity-matching` | Override matching rules (REST + skill) |
+| `phoenix-feedback-loop` | LLM feedback path only (`FAST_TRIAGE=false`) |
+| `phoenix-similarity-matching` | Documented rules; **enforced in code** via `feedback_matching.py` when `FAST_TRIAGE=true` |
 
 ---
 
@@ -201,9 +226,10 @@ See [.env.example](.env.example) for the full list.
 
 ## Phoenix integration
 
-- **Traces** — ADK steps exported via `clintrace_agent/instrumentation.py`; UI resolves trace IDs for deep links (`/redirects/traces/{otel_id}`).
+- **Traces** — ADK steps exported via `clintrace_agent/instrumentation.py`; UI resolves trace IDs for deep links (`/redirects/traces/{otel_id}`). Phoenix Cloud requires login; invite reviewers to your space for trace access.
 - **Annotations** — `phoenix_feedback.py` writes nurse reviews, NHAMCS ground truth, and quality evals; mirrored to span **Annotations** tab when possible.
-- **Read path** — `clintrace_agent/tools/phoenix_history.py` fetches `trace_annotations` and similar spans; `feedback_matching.py` enforces complaint-aware matching.
+- **Read path** — `phoenix_history.py` searches similar traces (span attributes → keyword overlap → annotation metadata). `feedback_matching.py` applies MTS-style protocol families and ED pathway marker checks so unrelated overrides (e.g. STEMI notes on head injury) are ignored.
+- **MCP** — Optional remote Phoenix MCP on Cloud Run for visible tool spans; feedback logic uses REST for speed.
 
 ---
 
@@ -233,7 +259,7 @@ ClinTrace/
 │   ├── action_composer.py       # Structured action cards for UI
 │   ├── instrumentation.py       # Phoenix OTel + OpenInference
 │   ├── phoenix_feedback.py      # Nurse / eval annotation writers
-│   ├── feedback_matching.py     # Complaint-matched override rules
+│   ├── feedback_matching.py     # MTS protocol families + pathway gates
 │   ├── tools/phoenix_history.py # query_phoenix_feedback (REST)
 │   ├── skills/                  # ADK Skills
 │   └── sub_agents/              # Pipeline agents
